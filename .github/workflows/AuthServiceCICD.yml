@@ -43,6 +43,9 @@ jobs:
         cd ElWiz-AuthService
         mvn clean install
 
+    - name: Log files in pwd
+      run: ls -al
+
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
