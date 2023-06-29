@@ -35,41 +35,13 @@ jobs:
         distribution: 'adopt'
         cache: maven
 
-    - name: Check if mysql service in docker is running
+    - name: Log docker running services
       run: docker ps -a
 
-
-# jobs:
-#     build:
-#         runs-on: ubuntu-latest
-
-#         services:
-#             mysql:
-#                 image: mysql:8.0
-#                 env:
-#                     MYSQL_ROOT_PASSWORD: mypassword
-#                     MYSQL_DATABASE: elwiz
-#                 ports:
-#                     - 3306:3306
-#                 # check mysql is up and running for 5 seconds
-#                 options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=3s --health-retries=2
-
-#         steps:
-#             - name: Clone repo
-#               uses: actions/checkout@v3
-            
-#             - name: Setup Java 17 environment
-#               uses: actions/setup-java@v3
-#               with:
-#                   java-version: '17'
-#                   distribution: 'adopt'
-#                   cache: 'maven'
-            
-#             - name: Log docker running services
-#               run: docker ps -a
-
-#             - name: Build with Maven
-#               run: |
+    - name: Build with Maven
+      run: |
+        cd ElWiz-AuthService
+        mvn clean install
             
 
 
