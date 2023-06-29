@@ -81,7 +81,7 @@ jobs:
       uses: mr-smithers-excellent/docker-build-push@v6
       with:
         image: rohitshah1706/elwiz
-        tags: auth-service-latest
+        tags: elective-service-latest
         registry: docker.io
         directory: ElWiz-ElectiveService
         dockerfile: ElWiz-ElectiveService/Dockerfile
