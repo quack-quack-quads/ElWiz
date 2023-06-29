@@ -5,6 +5,11 @@ on:
     branches: [main]
     paths:
       - ElWiz-AuthService/**
+  pull_request:
+    branches: [main]
+    paths:
+      - ElWiz-AuthService/**
+  workflow_dispatch:
 
 jobs:
   build:
