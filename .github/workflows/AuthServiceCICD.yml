@@ -46,10 +46,10 @@ jobs:
     - name: Log files in pwd
       run: ls -al
 
-    - name: Upload ElWiz-AuthService-Dockerfile artifact
+    - name: Upload ElWiz-AuthService Dockerfile artifact
       uses: actions/upload-artifact@v2
       with:
-        name: ElWiz-AuthService-Dockerfile
+        name: Dockerfile
         path: ElWiz-AuthService/Dockerfile
         retention-days: 1
 
@@ -65,10 +65,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Download ElWiz-AuthService-Dockerfile artifact
+    - name: Download Dockerfile artifact
       uses: actions/download-artifact@v2
       with:
-        name: ElWiz-AuthService-Dockerfile
+        name: Dockerfile
+        path: ElWiz-AuthService
 
     - name: Download ElWiz-AuthService.jar artifact
       uses: actions/download-artifact@v2
@@ -82,7 +83,7 @@ jobs:
         image: rohitshah1706/elwiz
         tags: auth-service:latest
         registry: docker.io
-        dockerfile: ElWiz-AuthService-Dockerfile
+        dockerfile: ElWiz-AuthService/Dockerfile
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }} 
         
