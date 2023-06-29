@@ -2,6 +2,6 @@ FROM openjdk:17
 
 EXPOSE 7070
 
-ADD target/Elwiz-AuthService.jar Elwiz-AuthService.jar
+ADD target/ElWiz-AuthService.jar ElWiz-AuthService.jar
 
 ENTRYPOINT ["java", "-jar", "/ElWiz-AuthService.jar"]

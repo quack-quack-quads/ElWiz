@@ -84,7 +84,7 @@ jobs:
         tags: auth-service-latest
         registry: docker.io
         directory: ElWiz-AuthService
-        dockerfile: Dockerfile
+        dockerfile: ElWiz-AuthService/Dockerfile
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }} 
         
