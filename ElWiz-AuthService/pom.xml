@@ -109,7 +109,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		<finalName>Elwiz-AuthService</finalName>
+		<finalName>ElWiz-AuthService</finalName>
 	</build>
 
 </project>
