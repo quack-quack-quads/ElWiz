@@ -1,6 +1,5 @@
 package dev.quackquackquad.ElWizAuthService.service;
 
-import dev.quackquackquad.ElWizAuthService.entity.Role;
 import dev.quackquackquad.ElWizAuthService.entity.UserEntity;
 import dev.quackquackquad.ElWizAuthService.error.User_DuplicateEmailException;
 import dev.quackquackquad.ElWizAuthService.error.User_WrongPasswordException;
@@ -11,9 +10,6 @@ import dev.quackquackquad.ElWizAuthService.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +33,7 @@ public class AuthService {
                 .password(user.getPassword())
                 .name(user.getName())
                 .gender(user.getGender())
-                .role(Role.USER)
+                .role("ROLE_USER")
                 .build();
         try{
             userRepository.save(userEntity);

@@ -10,11 +10,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
-@Entity
-@Table(name = "user")
+@Entity(name = "users")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -35,14 +33,13 @@ public class UserEntity implements UserDetails {
     @Column(name = "gender")
     private String gender;
 
-    @Enumerated(EnumType.STRING) // tells hibernate to store the enum as a string
-    private Role role;
+    private String role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         // should return a list of granted authorities(roles) for the user
         // we will return a list of SimpleGrantedAuthority
-        return List.of(new SimpleGrantedAuthority(role.name()));
+        return List.of(new SimpleGrantedAuthority(role));
     }
 
     @Override

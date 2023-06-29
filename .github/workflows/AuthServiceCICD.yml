@@ -16,15 +16,15 @@ jobs:
     runs-on: ubuntu-latest
 
     services:
-      mysql: 
-        image: mysql:8.0 
+      postgres:
+        image: postgres:latest
         env:
-          # get the root password from the secrets
-          MYSQL_ROOT_PASSWORD: mypassword
-          MYSQL_DATABASE: elwiz
+          POSTGRES_USER: root
+          POSTGRES_PASSWORD: mypassword
+          POSTGRES_DB: elwiz
         ports:
-          - 3306:3306 
-        options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=3s --health-retries=2
+          - 5432:5432
+        options: --health-cmd="pg_isready" --health-interval=5s --health-timeout=3s --health-retries=2
 
     steps:
     - uses: actions/checkout@v3
