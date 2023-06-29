@@ -43,7 +43,22 @@ jobs:
         cd ElWiz-AuthService
         mvn clean install
 
-    - name: Build the Docker image
-      run: |
-        ls
-        echo "Building the Docker image..."
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: ElWiz-AuthService.tar
+        path: ElWiz-AuthService/target/ElWiz-AuthService.jar
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Download artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: ElWiz-AuthService.tar
+        path: ElWiz-AuthService/target
+    
+    - name: Log files in pwd
+      run: ls -al
