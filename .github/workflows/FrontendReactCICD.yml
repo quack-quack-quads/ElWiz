@@ -1,0 +1,37 @@
+name: CICD for ElWiz React App
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - frontend-react/**
+  pull_request:
+    branches: [main]
+    paths:
+      - frontend-react/**
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up node v16
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+
+    - name: Log files in pwd
+      run: ls -al
+
+    - name: Build image & push to docker hub
+      uses: mr-smithers-excellent/docker-build-push@v6
+      with:
+        image: rohitshah1706/elwiz
+        tags: frontend-react-latest
+        registry: docker.io
+        directory: frontend-react
+        dockerfile: frontend-react/Dockerfile
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }} 
