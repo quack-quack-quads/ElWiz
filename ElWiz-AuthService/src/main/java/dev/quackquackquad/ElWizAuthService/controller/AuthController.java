@@ -29,7 +29,7 @@ public class AuthController {
     public User_LoginResponse login(@RequestBody UserModel user, HttpServletResponse response) throws User_WrongPasswordException {
         User_LoginResponse authResponse = authService.login(user);
         if (Objects.nonNull(authResponse)) {
-            Number maxAge = 1000 * 60 * 60 * 1; // 1 hour
+            Number maxAge = 1000 * 60 * 60 * 24; // 24 hours
             Cookie cookie = new Cookie("jwt", authResponse.getToken());
             cookie.setHttpOnly(true);
             cookie.setPath("/");
