@@ -87,8 +87,8 @@
 					</excludes>
 				</configuration>
 			</plugin>
-
 		</plugins>
+		<finalName>ElWiz-ApiGateway</finalName>
 	</build>
 
 </project>
