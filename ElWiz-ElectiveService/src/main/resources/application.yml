@@ -1,11 +1,14 @@
 server:
-  port: 8080
+  port: 8100
 
 spring:
   datasource:
     url: ${DB_URL}
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
+
+  application :
+    name : elective-service
 
   jpa:
     hibernate:
@@ -17,3 +20,8 @@ spring:
           lob:
             non_contextual_creation: true
         dialect: org.hibernate.dialect.PostgreSQLDialect
+
+eureka :
+  client :
+    serviceUrl :
+      defaultZone : http://localhost:8761/eureka

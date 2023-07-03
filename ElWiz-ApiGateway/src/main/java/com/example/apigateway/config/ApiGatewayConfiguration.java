@@ -19,18 +19,13 @@ public class ApiGatewayConfiguration {
         GatewayFilter authFilter = authenticationFilter.apply(new AuthenticationFilter.Config());
         return builder.routes()
                 .route(
-                        p -> p.path("/data-provider/**")
+                        p -> p.path("/elective-service/**")
                                 .filters(spec -> spec.filter(authFilter))
-                                .uri("lb://data-provider")
+                                .uri("lb://elective-service")
                 )
                 .route(
-                        p -> p.path("/scores-service/**")
-                                .filters(spec -> spec.filter(authFilter))
-                                .uri("lb://scores-service")
-                )
-                .route(
-                        p -> p.path("/authentication-service/**")
-                                .uri("lb://authentication-service")
+                        p -> p.path("/auth-service/**")
+                                .uri("lb://auth-service")
                 )
                 .build();
     }
