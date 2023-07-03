@@ -17,6 +17,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+
+    - name: Log files in pwd
+      run: ls -al
     
     - name: Build image & push to docker hub
       uses: mr-smithers-excellent/docker-build-push@v6
