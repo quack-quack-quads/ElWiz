@@ -1,12 +1,16 @@
 package com.example.apigateway.filters;
 
 import com.example.apigateway.config.RouteValidator;
+import com.example.apigateway.exceptions.CookieNotFoundException;
 import com.example.apigateway.services.JwtService;
 import org.apache.http.HttpHeaders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
+import org.springframework.http.HttpCookie;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class AuthenticationFilter extends AbstractGatewayFilterFactory<AuthenticationFilter.Config> {
@@ -24,20 +28,20 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
     public GatewayFilter apply(Config config) {
         return (((exchange, chain) -> {
             if(validator.isSecured.test(exchange.getRequest())){
-                //header contains token or not
-                if(!exchange.getRequest().getHeaders().containsKey(HttpHeaders.AUTHORIZATION)){
-                    throw new RuntimeException("Missing auth header");
-                }
-                String authHeader = exchange.getRequest().getHeaders().get(org.springframework.http.HttpHeaders.AUTHORIZATION).get(0);
-                if(authHeader != null && authHeader.startsWith("Bearer ")){
-                    authHeader = authHeader.substring(7);
-                }
+                String token = null;
                 try{
-                    jwtService.validateToken(authHeader);
+                    List<HttpCookie> cookies = exchange.getRequest().getCookies().get("jwt");
+                    token = cookies.get(0).getValue();
+                }catch(Exception e){
+                    throw new CookieNotFoundException("Auth cookie not found");
+                }
+
+                try{
+                    jwtService.validateToken(token);
                 }catch(Exception e){
                     throw new RuntimeException("Token invalid");
                 }
-                String email = jwtService.extractUsername(authHeader);
+                String email = jwtService.extractUsername(token);
                 exchange
                         .getRequest()
                         .mutate()
