@@ -1,6 +1,6 @@
 FROM openjdk:17
 
-EXPOSE 7070
+EXPOSE 8761
 
 ADD target/ElWiz-NamingServer.jar ElWiz-NamingServer.jar
 

@@ -1,6 +1,6 @@
 FROM openjdk:17
 
-EXPOSE 7070
+EXPOSE 8001
 
 ADD target/ElWiz-ApiGateway.jar ElWiz-ApiGateway.jar
 
