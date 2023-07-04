@@ -13,6 +13,8 @@ services:
       - 5432:5432
     volumes:
       - db-data:/var/lib/postgresql/data
+    networks:
+      - elwiz-network
 
   naming-server:
     container_name: naming-server
@@ -50,6 +52,22 @@ services:
       - ./ElWiz-AuthService/.env
     networks:
       - elwiz-network
+
+  api-gateway:
+    container_name: api-gateway
+    image: rohitshah1706/elwiz:api-gateway-latest
+    restart: always
+    depends_on:
+      - naming-server
+      - elective-service
+      - auth-service
+    ports:
+      - 8001:8001
+    env_file:
+      - ./ElWiz-APIGateway/.env
+    networks:
+      - elwiz-network
+
 volumes:
   db-data:
 networks:
