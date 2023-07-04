@@ -2,6 +2,7 @@
 version: '3.1'
 services:
   postgres:
+    container_name: postgres
     image: postgres:latest
     restart: always
     environment:
@@ -13,5 +14,43 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data
 
+  naming-server:
+    container_name: naming-server
+    image: rohitshah1706/elwiz:naming-server-latest
+    restart: always
+    ports:
+      - 8761:8761
+    networks:
+      - elwiz-network
+    
+  elective-service:
+    container_name: elective-service
+    image: rohitshah1706/elwiz:elective-service-latest
+    restart: always
+    depends_on:
+      - postgres
+      - naming-server
+    ports:
+      - 8100:8100
+    env_file:
+      - ./ElWiz-ElectiveService/.env
+    networks:
+      - elwiz-network
+
+  auth-service:
+    container_name: auth-service
+    image: rohitshah1706/elwiz:auth-service-latest
+    restart: always
+    depends_on:
+      - postgres
+      - naming-server
+    ports:
+      - 7070:7070
+    env_file:
+      - ./ElWiz-AuthService/.env
+    networks:
+      - elwiz-network
 volumes:
   db-data:
+networks:
+  elwiz-network:
