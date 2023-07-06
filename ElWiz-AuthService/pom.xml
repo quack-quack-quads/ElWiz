@@ -123,18 +123,6 @@
 					</excludes>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<configuration>
-					<systemPropertyVariables>
-						<DB_URL>jdbc:postgresql://localhost:5432/elwiz</DB_URL>
-						<DB_USERNAME>root</DB_USERNAME>
-						<DB_PASSWORD>mypassword</DB_PASSWORD>
-						<NAMING_SERVER_URL>http://localhost:8761/eureka</NAMING_SERVER_URL>
-					</systemPropertyVariables>
-				</configuration>
-			</plugin>
 		</plugins>
 		<finalName>ElWiz-AuthService</finalName>
 	</build>

@@ -5,8 +5,6 @@ import dev.quackquackquad.ElWizAuthService.model.UserModel;
 import dev.quackquackquad.ElWizAuthService.model.User_LoginResponse;
 import dev.quackquackquad.ElWizAuthService.model.User_SignUpResponse;
 import dev.quackquackquad.ElWizAuthService.repository.UserRepository;
-import jakarta.persistence.Column;
-import jakarta.persistence.Id;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
