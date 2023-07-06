@@ -33,5 +33,9 @@ build/
 .vscode/
 application.properties
 
+<<<<<<< HEAD
 ### Environment ###
+=======
+## Environment ##
+>>>>>>> d121117fe9fc240eebe0379d519f18beb430f16a
 .env
