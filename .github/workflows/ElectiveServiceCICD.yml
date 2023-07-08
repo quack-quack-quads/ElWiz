@@ -15,17 +15,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    services:
-      postgres:
-        image: postgres:latest
-        env:
-          POSTGRES_USER: root
-          POSTGRES_PASSWORD: mypassword
-          POSTGRES_DB: elwiz
-        ports:
-          - 5432:5432
-        options: --health-cmd="pg_isready" --health-interval=5s --health-timeout=3s --health-retries=2
-
     steps:
     - uses: actions/checkout@v3
     - name: Set up JDK 17
@@ -35,9 +24,6 @@ jobs:
         distribution: 'adopt'
         cache: maven
 
-    - name: Log docker running services
-      run: docker ps -a
-
     - name: Build with Maven
       run: |
         cd ElWiz-ElectiveService
@@ -46,37 +32,6 @@ jobs:
     - name: Log files in pwd
       run: ls -al
 
-    - name: Upload ElWiz-ElectiveService Dockerfile artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: Dockerfile
-        path: ElWiz-ElectiveService/Dockerfile
-        retention-days: 1
-
-    - name: Upload ElWiz-ElectiveService.jar artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: ElWiz-ElectiveService.tar
-        path: ElWiz-ElectiveService/target/ElWiz-ElectiveService.jar
-        retention-days: 1
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Download Dockerfile artifact
-      uses: actions/download-artifact@v2
-      with:
-        name: Dockerfile
-        path: ElWiz-ElectiveService
-
-    - name: Download ElWiz-ElectiveService.jar artifact
-      uses: actions/download-artifact@v2
-      with:
-        name: ElWiz-ElectiveService.tar
-        path: ElWiz-ElectiveService/target
-    
     - name: Build image & push to docker hub
       uses: mr-smithers-excellent/docker-build-push@v6
       with:
