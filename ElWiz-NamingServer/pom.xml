@@ -34,6 +34,26 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+				<groupId>software.amazon.awssdk</groupId>
+				<artifactId>cloudwatch</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>software.amazon.awssdk</groupId>
+				<artifactId>cloudwatchevents</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>software.amazon.awssdk</groupId>
+				<artifactId>cloudwatchlogs</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>software.amazon.awssdk</groupId>
+				<artifactId>sns</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>software.amazon.awssdk</groupId>
+				<artifactId>sqs</artifactId>
+			</dependency>
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
@@ -41,6 +61,14 @@
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-dependencies</artifactId>
 				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			
+			<dependency>
+				<groupId>software.amazon.awssdk</groupId>
+				<artifactId>bom</artifactId>
+				<version>2.20.25</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
