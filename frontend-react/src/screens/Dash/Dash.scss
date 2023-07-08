@@ -1,0 +1,37 @@
+.Dash{
+    padding : 10vh;
+    min-height: 100vh;
+    .greeting{
+        font-size: 5vh;
+        font-family: 'Josephin Sans';
+        font-weight: 400;
+    }
+    .intro{
+        font-size: 2.5vh;
+        color : black;
+    }
+    .optiontitle{
+        font-size: 3vh;
+        border : 5px solid var(--md-ref-palette-primary30);
+        border-radius: 15px;
+        width: fit-content;
+        background-color: white;
+    }
+    .options{
+        .optiontile{
+            text-align: center;
+            width: 40%;
+            max-width: 300px;
+            margin : 2vh 4vw 2vh 1vw;
+            padding : 2vh 2vw;
+            border-radius: 20px;
+            color : white;
+            .text{
+                font-size: 2.5vh;
+                font-weight: bold;
+                margin: auto;
+            }
+            cursor: pointer;
+        }
+    }
+}
