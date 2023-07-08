@@ -7,6 +7,7 @@ import Login from './screens/Login/Login'
 import Signup from './screens/Signup/Signup'
 import Navbar from './components/Navbar/Navbar'
 import Footer from './components/Footer/Footer'
+import Dash from './screens/Dash/Dash'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -17,6 +18,7 @@ function App() {
       <Routes>
         <Route path='/signup' element={<Signup/>}/>
         <Route path='/login' element={<Login/>}/>
+        <Route path='/dash' element={<Dash/>}/>
         <Route path='/' element={<Lander/>}/>
       </Routes>
       <Footer/>

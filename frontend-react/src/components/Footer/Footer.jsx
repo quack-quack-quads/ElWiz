@@ -1,4 +1,3 @@
-import "./Footer.scss";
 import {
   MDBFooter,
   MDBContainer,
