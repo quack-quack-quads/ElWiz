@@ -1,0 +1,26 @@
+.Hero{
+    background-image: url('../../assets/bg.jpg');  
+    min-height: 90vh;  
+    .herotext{
+        border-radius: 30px;
+        .heading{
+            font-family: 'Irish Grover', 'cursive';
+            font-size: 8vh;
+            color: var(--md-ref-palette-secondary70);
+        }
+        .tagline{
+            font-family: 'Poppins';
+            font-size: large;
+            color : white;
+            font-weight: 500;
+        }
+        .description{
+            font-family: 'Poppins';
+            color: black;
+            font-size: medium;
+        }
+        .btn-secondary{
+            width: fit-content;
+        }
+    }
+}
