@@ -14,6 +14,7 @@
     border: 2px solid var(--md-sys-color-primary-container);
     font-size: large;
     padding: 10px 25px;
+    font-family: 'Poppins';
   }
   .btn-primary:hover, .btn-primary:active{
     background-color: white !important;
@@ -35,5 +36,9 @@
   }
   .dropdown-item{
     cursor: pointer;
+  }
+  .purplebg{
+    background-image: url("./assets/bg.jpg");
+    background-repeat: no-repeat;
   }
 }
