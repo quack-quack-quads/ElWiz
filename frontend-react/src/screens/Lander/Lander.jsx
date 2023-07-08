@@ -1,8 +1,8 @@
 import './Lander.scss'
-
+import Hero from './Hero';
 const Lander = ()=>{
-    return <div className="Lander primary">
-        Hello
+    return <div className="Lander">
+        <Hero/>
     </div>
 }
 

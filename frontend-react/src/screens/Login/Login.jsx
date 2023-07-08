@@ -8,7 +8,7 @@ const Login = ()=>{
             <div className="banner m-2">ElWiz</div>
             <div className="tagline">The Elective Management Wizard</div>
         </div>
-        <div className="col-12 col-lg-6 primary d-flex flex-column justify-content-center">
+        <div className="col-12 col-lg-6 d-flex flex-column justify-content-center purplebg">
             <div className="logintext text-center on-primary-text">
                 LOG IN
             </div>
