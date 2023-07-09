@@ -1,6 +1,7 @@
 import { useState } from 'react'
+import { useSelector } from "react-redux"
 import './App.scss'
-import { BrowserRouter as Router, Routes, Route}from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 
 import Lander from './screens/Lander/Lander'
 import Login from './screens/Login/Login'
@@ -10,7 +11,8 @@ import Footer from './components/Footer/Footer'
 import Dash from './screens/Dash/Dash'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const user = useSelector(state => state.user)
+  console.log(user)
 
   return <div className="App">
     <Router>
