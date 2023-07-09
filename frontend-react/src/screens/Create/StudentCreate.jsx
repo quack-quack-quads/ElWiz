@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import './Create.scss'
 import CreateForm from '../../components/CreateForm/CreateForm'
 
 const StudentCreate = ()=>{
@@ -26,7 +25,7 @@ const StudentCreate = ()=>{
     return <CreateForm 
             fields={fields} 
             entity="Student"
-            heading={"Create New Student"}
+            heading={"Create a new Student"}
             description={"Fill in the following details to enter a new student into the database."}
         />
 }

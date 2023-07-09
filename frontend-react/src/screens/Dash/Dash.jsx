@@ -1,7 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import "./Dash.scss";
 import { AiOutlinePlus, AiFillRead } from "react-icons/ai";
 
 const Dash = () => {
+  const navigate = useNavigate()
   return (
     <div className="Dash purplebg d-flex flex-column justify-content-evenly">
       <div className="message">
@@ -19,7 +21,9 @@ const Dash = () => {
         <div className="col-12 col-lg-6 d-flex flex-column">
           <div className="optiontitle on-primary-text p-3 m-4">Students</div>
           <div className="options d-flex no-wrap justify-content-start">
-            <div className="optiontile d-flex flex-column primary-container align-items-center">
+            <div className="optiontile d-flex flex-column primary-container align-items-center"
+             onClick={()=>{navigate("/student/create")}}
+            >
               <AiOutlinePlus size={60} className="m-3" />
               <div className="text">Create</div>
             </div>
@@ -32,7 +36,9 @@ const Dash = () => {
         <div className="col-12 col-lg-6 d-flex flex-column">
           <div className="optiontitle on-primary-text p-3 m-4">Electives</div>
           <div className="options d-flex no-wrap justify-content-start">
-            <div className="optiontile d-flex flex-column primary-container align-items-center">
+            <div className="optiontile d-flex flex-column primary-container align-items-center"
+              onClick={()=>{navigate("/elective/create")}}
+            >
               <AiOutlinePlus size={60} className="m-3" />
               <div className="text">Create</div>
             </div>
