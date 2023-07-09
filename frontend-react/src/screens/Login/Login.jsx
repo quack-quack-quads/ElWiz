@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  
+
   const [waiting, setWaiting] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -33,19 +33,23 @@ const Login = () => {
       },
       data: data,
     };
-    setWaiting(true)
+    setWaiting(true);
     axios
       .request(config)
       .then((response) => {
         if (response.status == 200) {
           let data = response.data;
-          dispatch(
-            login({
-              name: data.user.name,
-              email: data.user.email,
-            })
-          );
-          navigate('/dash')
+          let userData = {
+            name: data.user.name,
+            email: data.user.email,
+          };
+          dispatch(login(userData));
+          let token = {
+            value: userData,
+            set: new Date(),
+          };
+          localStorage.setItem("ElWiz_user_data", JSON.stringify(token));
+          navigate("/dash");
         } else {
           throw new Error("Auth failed");
         }
@@ -53,8 +57,8 @@ const Login = () => {
       .catch((error) => {
         toast.error("Invalid credentials. Please try again with valid ones.");
       })
-      .finally(()=>{
-        setWaiting(false)
+      .finally(() => {
+        setWaiting(false);
       });
   };
   return (
@@ -86,17 +90,16 @@ const Login = () => {
                 setPassword(event.target.value);
               }}
             />
-            {   
-            waiting ? 
-                <Spinner className="align-self-end m-2 on-primary-text"/> :
-                <button
+            {waiting ? (
+              <Spinner className="align-self-end m-2 on-primary-text" />
+            ) : (
+              <button
                 className="btn btn-primary align-self-end m-2"
                 onClick={loginUser}
               >
                 Log in
               </button>
-            }
-            
+            )}
           </div>
         </div>
       </div>

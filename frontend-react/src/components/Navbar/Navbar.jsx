@@ -23,6 +23,7 @@ const Navbar = () => {
     axios.get('http://localhost:8001/auth-service/v1/logout')
     dispatcher(logout)
     setAuth(false)
+    localStorage.removeItem("ElWiz_user_data")
     navigate("/")
   }
 

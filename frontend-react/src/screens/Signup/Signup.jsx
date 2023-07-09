@@ -88,9 +88,9 @@ const Signup = () => {
           >Name</div>
           <input type="text" className="form-control shadow-none" />
           <div className="formhead m-2">Role</div>
-          <div class="dropdown">
+          <div className="dropdown">
             <button
-              class="btn btn-secondary dropdown-toggle"
+              className="btn btn-secondary dropdown-toggle"
               type="button"
               data-bs-toggle="dropdown"
               aria-expanded="false"

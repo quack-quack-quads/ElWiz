@@ -14,6 +14,7 @@ const CreateForm = ({ fields, entity, heading, description, submithandler}) => {
             return (
               <MDBInput
                 className="mb-4 mdbinput"
+                key={field.label}
                 type={field.type}
                 label={field.label}
                 onChange={(event) => {

@@ -7,11 +7,13 @@ import { useEffect } from "react";
 const Dash = () => {
   const navigate = useNavigate()
   var user = useSelector((state) => state.user);
+  
   useEffect(() => {
     if(user.email == null){
       navigate("/")
     }
   }, [user]);
+
   return (
     <div className="Dash purplebg d-flex flex-column justify-content-evenly">
       <div className="message">
