@@ -1,13 +1,23 @@
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 import "./Dash.scss";
 import { AiOutlinePlus, AiFillRead } from "react-icons/ai";
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import { useEffect } from "react";
 
 const Dash = () => {
   const navigate = useNavigate()
+  var user = useSelector((state) => state.user);
+  
+  useEffect(() => {
+    if(user.email == null){
+      navigate("/")
+    }
+  }, [user]);
+
   return (
     <div className="Dash purplebg d-flex flex-column justify-content-evenly">
       <div className="message">
-        <div className="greeting p-3 on-primary-text">Hi Subhajeet!</div>
+        <div className="greeting p-3 on-primary-text">Hi {user.name}!</div>
         <div className="row">
           <div className="col-12 col-md-7 col-lg-6 intro p-2 text-center">
             This is your consolidated dashboard. Use the options below to
