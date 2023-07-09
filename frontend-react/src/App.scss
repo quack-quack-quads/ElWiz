@@ -2,10 +2,10 @@
 
 :root{
   .form-control{
-    background-color: var(--md-sys-color-primary);
+    // background-color: var(--md-sys-color-primary);
     border-radius: 15px;
     margin : 10px 0 30px 0;
-    border : 2px solid black;
+    border : 3px solid var(--md-sys-color-primary-container);
     padding: 10px 15px;
   }
   .btn-primary, .btn-primary:active, .btn-primary:hover{

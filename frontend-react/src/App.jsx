@@ -9,6 +9,7 @@ import Signup from './screens/Signup/Signup'
 import Navbar from './components/Navbar/Navbar'
 import Footer from './components/Footer/Footer'
 import Dash from './screens/Dash/Dash'
+import StudentCreate from './screens/Create/StudentCreate'
 
 function App() {
   const user = useSelector(state => state.user)
@@ -21,6 +22,7 @@ function App() {
         <Route path='/signup' element={<Signup/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/dash' element={<Dash/>}/>
+        <Route path='/student/create' element={<StudentCreate/>}/>
         <Route path='/' element={<Lander/>}/>
       </Routes>
       <Footer/>
