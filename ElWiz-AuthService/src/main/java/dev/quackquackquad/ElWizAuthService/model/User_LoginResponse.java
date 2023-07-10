@@ -14,6 +14,5 @@ public class User_LoginResponse {
     private String token;
     private HttpStatus status;
     private String message;
-
     private UserModel user;
 }

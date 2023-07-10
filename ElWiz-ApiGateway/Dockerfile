@@ -16,6 +16,12 @@ WORKDIR /app
 
 COPY --from=build-stage /app/target/ElWiz-ApiGateway.jar ElWiz-ApiGateway.jar
 
+# create .aws credentials file for aws cli
+RUN touch ~/.aws/credentials
+RUN echo "[default]" >> ~/.aws/credentials
+RUN echo "aws_access_key_id = $AWS_ACCESS_KEY_ID" >> ~/.aws/credentials
+RUN echo "aws_secret_access_key = $AWS_SECRET_ACCESS_KEY" >> ~/.aws/credentials
+
 EXPOSE 8001
 
 ENTRYPOINT ["java", "-jar", "./ElWiz-ApiGateway.jar"]

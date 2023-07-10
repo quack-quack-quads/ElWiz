@@ -1,5 +1,6 @@
 package dev.quackquackquad.ElWizAuthService.service;
 
+import dev.quackquackquad.ElWizAuthService.entity.UserEntity;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

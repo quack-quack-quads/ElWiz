@@ -32,8 +32,7 @@ public class AuthService {
                 .email(user.getEmail())
                 .password(user.getPassword())
                 .name(user.getName())
-                .gender(user.getGender())
-                .role("ROLE_USER")
+                .role(user.getRole())
                 .build();
         try{
             userRepository.save(userEntity);
@@ -70,7 +69,7 @@ public class AuthService {
                         .builder()
                         .email(userEntity.getEmail())
                         .name(userEntity.getName())
-                        .gender(userEntity.getGender())
+                        .role(userEntity.getRole())
                         .build()
                 ).build();
     }
