@@ -1,66 +1,60 @@
-import "./Login.scss";
-import Wizard from "../../assets/wizard.png";
+import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
-import { useDispatch } from "react-redux";
-import { useState } from "react";
-import { login } from "../../store";
+import './Login.scss'
+import Wizard from '../../assets/wizard.png'
+
+import { useForm } from "../../hooks"
+import { login } from "../../store"
+import { loginUserAPICall } from "../../services"
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Spinner } from "react-bootstrap";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const initialState = {
+    email: "",
+    password: ""
+  }
 
   const [waiting, setWaiting] = useState(false);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+
+  const handleLoginResponse = (response) => {
+    if (response.status == 200) {
+      let data = response.data;
+      let userData = {
+        name: data.user.name,
+        email: data.user.email,
+      };
+      dispatch(login(userData));
+      navigate("/dash");
+    } else {
+      throw new Error("Auth failed");
+    }
+  }
 
   const loginUser = () => {
-    let data = JSON.stringify({
-      email: email,
-      password: password,
-    });
-
-    let config = {
-      method: "post",
-      maxBodyLength: Infinity,
-      url: "http://localhost:8001/auth-service/v1/login",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: data,
-    };
     setWaiting(true);
-    axios
-      .request(config)
+    loginUserAPICall(values)
       .then((response) => {
-        if (response.status == 200) {
-          let data = response.data;
-          let userData = {
-            name: data.user.name,
-            email: data.user.email,
-          };
-          dispatch(login(userData));
-          let token = {
-            value: userData,
-            set: new Date(),
-          };
-          localStorage.setItem("ElWiz_user_data", JSON.stringify(token));
-          navigate("/dash");
-        } else {
-          throw new Error("Auth failed");
-        }
+        handleLoginResponse(response);
       })
       .catch((error) => {
-        toast.error("Invalid credentials. Please try again with valid ones.");
+        error.response?.data?.message !== null ? toast.error(error.response.data.message) 
+        : toast.error("Invalid credentials. Please try again with valid ones.");
       })
       .finally(() => {
         setWaiting(false);
       });
   };
+
+  const { onChange, onSubmit, values } = useForm(loginUser, initialState)
+
   return (
     <>
       <div className="Login row">
@@ -78,24 +72,22 @@ const Login = () => {
             <input
               type="text"
               className="form-control shadow-none"
-              onChange={(event) => {
-                setEmail(event.target.value);
-              }}
+              name='email'
+              onChange={onChange}
             />
             <div className="formhead m-2">Password</div>
             <input
               type="password"
               className="form-control shadow-none"
-              onChange={(event) => {
-                setPassword(event.target.value);
-              }}
+              name='password'
+              onChange={onChange}
             />
             {waiting ? (
               <Spinner className="align-self-end m-2 on-primary-text" />
             ) : (
               <button
                 className="btn btn-primary align-self-end m-2"
-                onClick={loginUser}
+                onClick={onSubmit}
               >
                 Log in
               </button>

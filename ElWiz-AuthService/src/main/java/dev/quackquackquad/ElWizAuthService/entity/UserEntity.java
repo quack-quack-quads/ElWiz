@@ -30,9 +30,6 @@ public class UserEntity implements UserDetails {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "gender")
-    private String gender;
-
     private String role;
 
     @Override

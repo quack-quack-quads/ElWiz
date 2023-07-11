@@ -1,20 +1,19 @@
-# docker-compose file to run postgresql 
 version: '3.1'
 services:
-  postgres:
-    container_name: postgres
-    image: postgres:latest
-    restart: always
-    environment:
-      POSTGRES_PASSWORD: mypassword
-      POSTGRES_USER: root
-      POSTGRES_DB: elwiz
-    ports:
-      - 5432:5432
-    volumes:
-      - db-data:/var/lib/postgresql/data
-    networks:
-      - elwiz-network
+  # postgres:
+  #   container_name: postgres
+  #   image: postgres:latest
+  #   restart: always
+  #   environment:
+  #     POSTGRES_PASSWORD: mypassword
+  #     POSTGRES_USER: root
+  #     POSTGRES_DB: elwiz
+  #   ports:
+  #     - 5432:5432
+  #   volumes:
+  #     - db-data:/var/lib/postgresql/data
+    # networks:
+    #   - elwiz-network
 
   naming-server:
     container_name: naming-server
@@ -22,38 +21,32 @@ services:
     restart: always
     ports:
       - 8761:8761
-    networks:
-      - elwiz-network
     
   elective-service:
     container_name: elective-service
     image: rohitshah1706/elwiz:elective-service-latest
     restart: always
     depends_on:
-      - postgres
+      # - postgres
       - naming-server
     ports:
       - 8100:8100
     env_file:
       - ./ElWiz-ElectiveService/.env
-    networks:
-      - elwiz-network
 
   auth-service:
     container_name: auth-service
     image: rohitshah1706/elwiz:auth-service-latest
     restart: always
     depends_on:
-      - postgres
+      # - postgres
       - naming-server
     ports:
       - 7070:7070
     env_file:
       - ./ElWiz-AuthService/.env
-    networks:
-      - elwiz-network
 
-  api-gateway:
+  apiGateway:
     container_name: api-gateway
     image: rohitshah1706/elwiz:api-gateway-latest
     restart: always
@@ -65,10 +58,27 @@ services:
       - 8001:8001
     env_file:
       - ./ElWiz-APIGateway/.env
-    networks:
-      - elwiz-network
+
+  # frontend:
+  #   container_name: frontend
+  #   image: rohitshah1706/elwiz:frontend-react-latest
+  #   restart: always
+  #   ports:
+  #     - 80:80
+  #   env_file:
+  #     - ./frontend-react/.env
+
+  frontend:
+    container_name: frontend
+    build: ./frontend-react
+    ports:
+      - 80:5173
+    volumes:
+      - ./frontend-react:/app
+      - /app/node_modules
+    env_file:
+      - ./frontend-react/.env
+    command: npm run dev
 
 volumes:
   db-data:
-networks:
-  elwiz-network:

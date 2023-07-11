@@ -2,8 +2,8 @@ import "./Navbar.scss";
 import logo from "../../assets/logo.png";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import axios from 'axios'
 import { logout } from "../../store";
+import { logoutUserAPICall } from "../../services"
 import { useEffect, useState } from "react";
 
 const Navbar = () => {
@@ -20,11 +20,15 @@ const Navbar = () => {
   const dispatcher = useDispatch()
 
   const logoutUser = ()=>{
-    axios.get('http://localhost:8001/auth-service/v1/logout')
-    dispatcher(logout)
-    setAuth(false)
-    localStorage.removeItem("ElWiz_user_data")
-    navigate("/")
+    logoutUserAPICall()
+    .then((response)=>{
+      console.log(response.data)
+      dispatcher(logout)
+      setAuth(false)
+      navigate("/") 
+    }).catch((error)=>{
+      console.log(error)
+    })
   }
 
   return (

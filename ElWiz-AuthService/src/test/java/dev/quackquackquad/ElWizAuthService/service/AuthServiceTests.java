@@ -36,11 +36,11 @@ public class AuthServiceTests {
     public void init() {
         this.user = UserModel.builder()
                 .email("rohit1@gmail.com").password("password")
-                .name("Rohit Shah").gender("M").build();
+                .name("Rohit Shah").build();
         this.userEntity = UserEntity.builder()
                 .id(UUIDService.getUUID())
                 .email(user.getEmail()).password(user.getPassword())
-                .name(user.getName()).role("ROLE_USER").gender(user.getGender())
+                .name(user.getName()).role("ROLE_USER")
                 .build();
     }
 
@@ -73,7 +73,6 @@ public class AuthServiceTests {
 
         Assertions.assertThat(response.getUser().getEmail()).isEqualTo(user.getEmail());
         Assertions.assertThat(response.getUser().getName()).isEqualTo(user.getName());
-        Assertions.assertThat(response.getUser().getGender()).isEqualTo(user.getGender());
         Assertions.assertThat(response.getUser().getPassword()).isNull();
     }
 }
