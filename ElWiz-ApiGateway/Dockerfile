@@ -17,6 +17,7 @@ WORKDIR /app
 COPY --from=build-stage /app/target/ElWiz-ApiGateway.jar ElWiz-ApiGateway.jar
 
 # create .aws credentials file for aws cli
+RUN mkdir ~/.aws
 RUN touch ~/.aws/credentials
 RUN echo "[default]" >> ~/.aws/credentials
 RUN echo "aws_access_key_id = $AWS_ACCESS_KEY_ID" >> ~/.aws/credentials
