@@ -21,6 +21,7 @@ import App from './App.jsx'
 import './theme/theme.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.js'
+import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 
 const persistConfig = {
   key: "root",

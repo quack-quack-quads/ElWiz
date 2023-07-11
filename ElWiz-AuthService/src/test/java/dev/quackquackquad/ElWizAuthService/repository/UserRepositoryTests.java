@@ -25,7 +25,7 @@ public class UserRepositoryTests {
         String uid = UUIDService.getUUID();
         this.userEntity = UserEntity.builder()
                 .id(uid).email("rohit1@gmail.com").password("password").name("Rohit")
-                .gender("M").role("ROLE_USER").build();
+                .role("ROLE_USER").build();
     }
 
     @Test
@@ -37,7 +37,6 @@ public class UserRepositoryTests {
         Assertions.assertThat(savedUser.getEmail()).isEqualTo(this.userEntity.getEmail());
         Assertions.assertThat(savedUser.getPassword()).isEqualTo(this.userEntity.getPassword());
         Assertions.assertThat(savedUser.getName()).isEqualTo(this.userEntity.getName());
-        Assertions.assertThat(savedUser.getGender()).isEqualTo(this.userEntity.getGender());
         Assertions.assertThat(savedUser.getRole()).isEqualTo(this.userEntity.getRole());
     }
 
@@ -52,7 +51,6 @@ public class UserRepositoryTests {
         Assertions.assertThat(user.getEmail()).isEqualTo(this.userEntity.getEmail());
         Assertions.assertThat(user.getPassword()).isEqualTo(this.userEntity.getPassword());
         Assertions.assertThat(user.getName()).isEqualTo(this.userEntity.getName());
-        Assertions.assertThat(user.getGender()).isEqualTo(this.userEntity.getGender());
         Assertions.assertThat(user.getRole()).isEqualTo(this.userEntity.getRole());
     }
 }

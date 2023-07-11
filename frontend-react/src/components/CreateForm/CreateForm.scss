@@ -1,0 +1,34 @@
+.wrapper{
+    min-height: 100vh;
+    padding-top: 10vh;
+}
+.CreateScreen{
+    width: fit-content;
+    height: fit-content;
+    background-color: white;
+    border-radius: 30px;
+    .message{
+        .heading{
+            font-size: 3.5vmin;
+            font-family: 'Irish Grover';
+        }
+        .description{
+            font-family: 'Poppins';
+            font-size: 2.1vmin;
+        }
+    }
+    .CreateForm{
+        font-size: 2vmin;
+        .mdbinput{
+            padding: 15px;
+            width: 70vw;
+            min-width: 260px;
+            max-width: 500px;
+            margin : 4vh 0;
+        }
+        .submitbtn{
+            margin-top: 5vh;
+            border-radius: 20px;
+        }
+    }
+}

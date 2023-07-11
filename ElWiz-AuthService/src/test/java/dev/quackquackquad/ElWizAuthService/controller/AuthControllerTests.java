@@ -44,7 +44,7 @@ public class AuthControllerTests {
     public void init() {
         this.user = UserModel.builder()
                 .email("rohit1@gmail.com").password("password")
-                .name("Rohit Shah").gender("M").build();
+                .name("Rohit Shah").build();
     }
 
     @Test
@@ -81,7 +81,6 @@ public class AuthControllerTests {
         response.andExpect(MockMvcResultMatchers.jsonPath("$.token").value("token"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.user.email").value(this.user.getEmail()))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.user.name").value(this.user.getName()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.user.gender").value(this.user.getGender()))
                 .andExpect(MockMvcResultMatchers.cookie().exists("jwt"))
                 .andExpect(MockMvcResultMatchers.cookie().value("jwt", "token"))
                 .andDo(MockMvcResultHandlers.print());

@@ -9,11 +9,10 @@ import Signup from './screens/Signup/Signup'
 import Navbar from './components/Navbar/Navbar'
 import Footer from './components/Footer/Footer'
 import Dash from './screens/Dash/Dash'
+import StudentCreate from './screens/Create/StudentCreate'
+import ElectiveCreate from './screens/Create/ElectiveCreate'
 
 function App() {
-  const user = useSelector(state => state.user)
-  console.log(user)
-
   return <div className="App">
     <Router>
       <Navbar/>
@@ -21,6 +20,8 @@ function App() {
         <Route path='/signup' element={<Signup/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/dash' element={<Dash/>}/>
+        <Route path='/student/create' element={<StudentCreate/>}/>
+        <Route path='/elective/create' element={<ElectiveCreate/>}/>
         <Route path='/' element={<Lander/>}/>
       </Routes>
       <Footer/>
