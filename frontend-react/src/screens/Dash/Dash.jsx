@@ -37,7 +37,9 @@ const Dash = () => {
               <AiOutlinePlus size={60} className="m-3" />
               <div className="text">Create</div>
             </div>
-            <div className="optiontile d-flex flex-column primary-container align-items-center">
+            <div className="optiontile d-flex flex-column primary-container align-items-center"
+              onClick={()=>{navigate("/student/retrieve")}}
+            >
               <AiFillRead size={60} className="m-3" />
               <div className="text">Retrieve</div>
             </div>
@@ -52,7 +54,9 @@ const Dash = () => {
               <AiOutlinePlus size={60} className="m-3" />
               <div className="text">Create</div>
             </div>
-            <div className="optiontile d-flex flex-column primary-container align-items-center">
+            <div className="optiontile d-flex flex-column primary-container align-items-center"
+              onClick={()=>{navigate("/elective/retrieve")}}
+            >
               <AiFillRead size={60} className="m-3" />
               <div className="text">Retrieve</div>
             </div>

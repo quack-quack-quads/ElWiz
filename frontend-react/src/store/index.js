@@ -5,6 +5,8 @@ const initialState = {
         email: null,
         role: null,
     },
+    electives: [],
+    students: []
 }
 
 export const authSlice = createSlice({
@@ -16,9 +18,15 @@ export const authSlice = createSlice({
         },
         logout: (state) => {
             state.user = null;
+        },
+        setStudents: (state, action) => {
+            state.students = action.payload;
+        },
+        setElectives: (state, action) => {
+            state.electives = action.payload;
         }
     }
 })
 
-export const { login, logout } = authSlice.actions;
+export const { login, logout, setStudents, setElectives } = authSlice.actions;
 export default authSlice.reducer;
