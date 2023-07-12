@@ -2,6 +2,7 @@ package dev.quackquackquad.ElWizElectiveService.services;
 
 import dev.quackquackquad.ElWizElectiveService.exceptions.ElectiveNotFoundException;
 import dev.quackquackquad.ElWizElectiveService.models.Elective;
+import dev.quackquackquad.ElWizElectiveService.models.ElectiveStudentAssociation;
 import dev.quackquackquad.ElWizElectiveService.models.Student;
 import dev.quackquackquad.ElWizElectiveService.repositories.ElectiveRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,5 +32,13 @@ public class ElectiveService {
 
     public void deleteElectiveById(String id){
         electiveRepository.deleteById(id);
+    }
+
+    public List<Student> getStudentsByElectiveId(String electiveId) {
+        Optional<Elective> elective = electiveRepository.findById(electiveId);
+        if(elective.isEmpty()){
+            throw new ElectiveNotFoundException(String.format("Elective not found with id = %s", electiveId));
+        }
+        return elective.get().getAssociations().stream().map(ElectiveStudentAssociation::getStudent).toList();
     }
 }

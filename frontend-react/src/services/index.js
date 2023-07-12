@@ -44,3 +44,126 @@ export const logoutUserAPICall = () => {
 
   return axios.request(config);
 }
+
+export const fetchStudentListAPICall = () => {
+  let config = {
+    method: "get",
+    maxBodyLength: Infinity,
+    url: `${VITE_API_GATEWAY_BASE_URL}/elective-service/student`,
+    headers: {
+      "Content-Type": "application/json",
+    }
+  }
+
+  return axios.request(config);
+}
+
+export const fetchElectiveListAPICall = () => {
+  let config = {
+    method: "get",
+    maxBodyLength: Infinity,
+    url: `${VITE_API_GATEWAY_BASE_URL}/elective-service/elective`,
+    headers: {
+      "Content-Type": "application/json",
+    }
+  }
+
+  return axios.request(config);
+}
+
+export const fetchStudentDetailsAPICall = (emailId) => {
+  let config = {
+    method: "get",
+    maxBodyLength: Infinity,
+    url: `${VITE_API_GATEWAY_BASE_URL}/elective-service/student/${emailId}`,
+    headers: {
+      "Content-Type": "application/json",
+    }
+  }
+
+  return axios.request(config);
+}
+
+export const fetchElectiveDetailsAPICall = (code) => {
+  let config = {
+    method: "get",
+    maxBodyLength: Infinity,
+    url: `${VITE_API_GATEWAY_BASE_URL}/elective-service/elective/${code}`,
+    headers: {
+      "Content-Type": "application/json",
+    }
+  }
+
+  return axios.request(config);
+}
+
+export const fetchStudentElectivesAPICall = (emailId) => {
+  let config = {
+    method: "get",
+    maxBodyLength: Infinity,
+    url: `${VITE_API_GATEWAY_BASE_URL}/elective-service/student/${emailId}/elective`,
+    headers: {
+      "Content-Type": "application/json",
+    }
+  }
+
+  return axios.request(config);
+}
+
+export const fetchElectiveStudentsAPICall = (code) => {
+  let config = {
+    method: "get",
+    maxBodyLength: Infinity,
+    url: `${VITE_API_GATEWAY_BASE_URL}/elective-service/elective/${code}/student`,
+    headers: {
+      "Content-Type": "application/json",
+    }
+  }
+
+  return axios.request(config);
+}
+
+export const updateStudentDetails = (studentObject) => {
+  let data = JSON.stringify(studentObject);
+  let config = {
+    method: "put",
+    maxBodyLength: Infinity,
+    url: `${VITE_API_GATEWAY_BASE_URL}/elective-service/student`,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: data
+  }
+
+  return axios.request(config);
+}
+
+export const updateElectiveDetails = (electiveObject) => {
+  let data = JSON.stringify(electiveObject);
+  let config = {
+    method: "put",
+    maxBodyLength: Infinity,
+    url: `${VITE_API_GATEWAY_BASE_URL}/elective-service/elective`,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: data
+  }
+
+  return axios.request(config);
+}
+
+export const addElectiveByIdAPICall = (associationObject) => {
+  let data = JSON.stringify(associationObject);
+  let config = {
+    method: "post",
+    maxBodyLength: Infinity,
+    url: `${VITE_API_GATEWAY_BASE_URL}/elective-service/student/elective`,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: data
+  }
+
+  return axios.request(config);
+}
