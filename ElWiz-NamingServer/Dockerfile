@@ -16,6 +16,13 @@ WORKDIR /app
 
 COPY --from=build-stage /app/target/ElWiz-NamingServer.jar ElWiz-NamingServer.jar
 
+# create .aws credentials file for aws cli
+RUN mkdir ~/.aws
+RUN touch ~/.aws/credentials
+RUN echo "[default]" >> ~/.aws/credentials
+RUN echo "aws_access_key_id = $AWS_ACCESS_KEY_ID" >> ~/.aws/credentials
+RUN echo "aws_secret_access_key = $AWS_SECRET_ACCESS_KEY" >> ~/.aws/credentials
+
 EXPOSE 8761
 
 ENTRYPOINT ["java", "-jar", "./ElWiz-NamingServer.jar"]

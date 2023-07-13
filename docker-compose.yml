@@ -21,6 +21,8 @@ services:
     restart: always
     ports:
       - 8761:8761
+    env_file:
+      - ./ElWiz-NamingServer/.env
     
   elective-service:
     container_name: elective-service
@@ -59,26 +61,26 @@ services:
     env_file:
       - ./ElWiz-APIGateway/.env
 
-  # frontend:
-  #   container_name: frontend
-  #   image: rohitshah1706/elwiz:frontend-react-latest
-  #   restart: always
-  #   ports:
-  #     - 80:80
-  #   env_file:
-  #     - ./frontend-react/.env
-
   frontend:
     container_name: frontend
-    build: ./frontend-react
+    image: rohitshah1706/elwiz:frontend-react-latest
+    restart: always
     ports:
-      - 80:5173
-    volumes:
-      - ./frontend-react:/app
-      - /app/node_modules
+      - 80:80
     env_file:
       - ./frontend-react/.env
-    command: npm run dev
+
+  # frontend:
+  #   container_name: frontend
+  #   build: ./frontend-react
+  #   ports:
+  #     - 80:5173
+  #   volumes:
+  #     - ./frontend-react:/app
+  #     - /app/node_modules
+  #   env_file:
+  #     - ./frontend-react/.env
+  #   command: npm run dev
 
 volumes:
   db-data:
