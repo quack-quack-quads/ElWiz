@@ -8,6 +8,9 @@ import Login from "./screens/Login/Login";
 import Signup from "./screens/Signup/Signup";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
+
+// import Carousel from "./components/Carousel/Carousel";
+
 import Dash from "./screens/Dash/Dash";
 import StudentCreate from "./screens/Create/StudentCreate";
 import ElectiveCreate from "./screens/Create/ElectiveCreate";
@@ -19,6 +22,7 @@ import ElectiveDetails from "./screens/Details/ElectiveDetails";
 import { fetchStudentListAPICall, fetchElectiveListAPICall } from "./services";
 import { setElectives, setStudents } from "./store";
 import { VITE_ENV_TRIAL } from "./config"
+
 
 function App() {
 	console.log("Showing env variable", VITE_ENV_TRIAL)
@@ -35,7 +39,7 @@ function App() {
 		}
 	};
 
-  const fetchElectiveList = async () => {
+	const fetchElectiveList = async () => {
 		try {
 			const response = await fetchElectiveListAPICall();
 			return response.data;
@@ -60,21 +64,21 @@ function App() {
 				dispatch(setStudents(data));
 			});
 		}
-    if (electives.length === 0) {
-      fetchElectiveList().then((data) => {
-        // ! sort according to code
-        data.sort((a, b) => {
-          if (a.code < b.code) {
-            return -1;
-          }
-          if (a.code > b.code) {
-            return 1;
-          }
-          return 0;
-        });
-        dispatch(setElectives(data));
-      });
-    }
+		if (electives.length === 0) {
+			fetchElectiveList().then((data) => {
+				// ! sort according to code
+				data.sort((a, b) => {
+					if (a.code < b.code) {
+						return -1;
+					}
+					if (a.code > b.code) {
+						return 1;
+					}
+					return 0;
+				});
+				dispatch(setElectives(data));
+			});
+		}
 	}, []);
 	return (
 		<div className="App">
@@ -91,21 +95,23 @@ function App() {
 					/>
 					<Route
 						path="/student/retrieve"
-						element={<StudentRetrieve students={students}/>}
+						element={<StudentRetrieve students={students} />}
 					/>
 					<Route
 						path="/elective/retrieve"
-						element={<ElectiveRetrieve electives={electives}/>}
+						element={<ElectiveRetrieve electives={electives} />}
 					/>
 					<Route
 						path="/student/details/:email"
-						element={<StudentDetails electives={electives}/>}
+						element={<StudentDetails electives={electives} />}
 					/>
 					<Route
 						path="/elective/details/:code"
-						element={<ElectiveDetails students={students}/>}
+						element={<ElectiveDetails students={students} />}
 					/>
 					<Route path="/" element={<Lander />} />
+
+					{/* <Route path="/cdev" element={<Carousel />} /> */}
 				</Routes>
 				<Footer />
 			</Router>

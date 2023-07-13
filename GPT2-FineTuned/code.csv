@@ -1,0 +1,206 @@
+id,Course Code,Course Name
+1,AAPI,Asian American and Pacific Islander Studies
+2,AAS,African American Studies
+3,AESE,Architecture Based Enterprise Systems Engineering
+4,AIP,Academic Internship Program
+5,ANAR,Anthropological Archaeology
+6,ANBI,Anthropology/ Biological Anthropology
+7,ANES,Anesthesiology
+8,ANSC,Anthro/ Sociocultural Anthropology
+9,ANTH,Anthropology
+10,AUD,Audiology
+11,AWP,Analytical Writing Program
+12,BENG,Bioengineering
+13,BGGN,Biology/ Grad/ General
+14,BGJC,Biology/ Grad/ Journal Club
+15,BGRD,Biology/ Grad/ Research Discussion
+16,BGSE,Biology/ Grad/ Seminar
+17,BIBC,Biology/ Biochemistry
+18,BICD,"Biology/ Genetics, Cellular and Developmental"
+19,BIEB,"Biology/ Ecology, Behavior, and Evolutionary"
+20,BILD,Biology/ Lower Division
+21,BIMM,"Biology/ Molecular Biology, Microbiology"
+22,BIOM,Biomedical Sciences
+23,BIPN,Biology/ Animal Physiology and Neuroscience
+24,BISP,Biology/ Special Studies
+25,BNFO,Bioinformatics
+26,CAT,"Culture, Art, and Technology"
+27,CCS,Climate Change Studies
+28,CENG,Chemical Engineering
+29,CGS,Critical Gender Studies
+30,CHEM,Chemistry and Biochemistry
+31,CHIN,Chinese Studies
+32,CLAS,Classical Studies
+33,CLIN,Clinical Psychology
+34,CLRE,Clinical Research
+35,CLSS,Classics
+36,CMM,Cellular & Molecular Medicine
+37,COGR,Communication/ Graduate
+38,COGS,Cognitive Science
+39,COMM,Communication
+40,CONT,Contemporary Issues
+41,CSE,Computer Science and Engineering
+42,CSS,Computational Social Science
+43,DDPM,Drug Development and Product Management
+44,DERM,Dermatology
+45,DOC,Dimensions of Culture
+46,DSC,Data Science
+47,DSE,Data Science and Engineering
+48,DSGN,Design
+49,EAP,Education Abroad Program
+50,ECE,Electrical and Computer Engineering
+51,ECON,Economics
+52,EDS,Education Studies
+53,EMED,Emergency Medicine
+54,ENG,Engineering
+55,ENVR,Environmental Studies
+56,ERC,Eleanor Roosevelt College
+57,ESYS,Environmental Systems
+58,ETHN,Ethnic Studies
+59,ETIM,Ethnic Studies/ Interdisciplinary Research Methods
+60,EXPR,Exchange Programs
+61,FILM,Film Studies
+62,FMPH,Family Medicine and Public Health
+63,FPM,Family and Preventive Medicine
+64,GLBH,Global Health
+65,GMST,German Studies Program
+66,GPCO,GPS/ Core
+67,GPEC,GPS/ Economics
+68,GPGN,GPS/ General
+69,GPIM,GPS/ International Management
+70,GPLA,GPS/ Language
+71,GPPA,GPS/ Policy Analytics
+72,GPPS,GPS/ Political Science
+73,GSS,Global South Studies
+74,HDP,Human Development Program
+75,HDS,Human Developmental Sciences
+76,HIAF,History of Africa
+77,HIEA,History of East Asia
+78,HIEU,History of Europe
+79,HIGL,"History, Global"
+80,HIGR,"History, Graduate"
+81,HILA,History of Latin America
+82,HILD,"History, Lower Division"
+83,HINE,History of the Near East
+84,HISC,History of Science
+85,HITO,History Topics
+86,HIUS,History of the United States
+87,HLAW,Health Law
+88,HMNR,Human Rights
+89,HUM,Humanities
+90,ICAM,Computing and the Arts
+91,ICEP,Intercampus Exchange Program
+92,INTL,International Studies
+93,IRLA,International Relations/ Pacific Study-Language
+94,JAPN,Japanese Studies
+95,JUDA,Judaic Studies
+96,JWSP,Jewish Studies Program
+97,LATI,Latin American Studies
+98,LAWS,Law and Society
+99,LHCO,Leadership/ Health Care Organizations
+100,LIAB,Linguistics/ Arabic
+101,LIDS,Linguistics/ Directed Study-Language
+102,LIEO,Linguistics/ Esperanto
+103,LIFR,Linguistics/ French
+104,LIGM,Linguistics/ German
+105,LIGN,Linguistics/ General
+106,LIHI,Linguistics/ Hindi
+107,LIHL,Linguistics/ Heritage Languages
+108,LIIT,Linguistics/ Italian
+109,LIPO,Linguistics/ Portuguese
+110,LISL,Linguistics/ American Sign Language
+111,LISP,Linguistics/ Spanish
+112,LTAF,Literature/ African
+113,LTAM,Literature of the Americas
+114,LTCH,Literature/ Chinese
+115,LTCO,Literature/ Comparative
+116,LTCS,Literature/ Cultural Studies
+117,LTEA,Literatures/ East Asian
+118,LTEN,Literatures in English
+119,LTEU,Literature/ European and Eurasian
+120,LTFR,Literature/ French
+121,LTGK,Literature/ Greek
+122,LTGM,Literature/ German
+123,LTIT,Literature/ Italian
+124,LTKO,Literature/ Korean
+125,LTLA,Literature/ Latin
+126,LTRU,Literature/ Russian
+127,LTSP,Literature/ Spanish
+128,LTTH,Literature/ Theory
+129,LTWL,Literatures of the World
+130,LTWR,Literature/ Writing
+131,MAE,Mechanical and Aerospace Engineering
+132,MATH,Mathematics
+133,MATS,Materials Science and Engineering
+134,MBC,Marine Biodiversity & Conservation
+135,MCWP,Muir College Writing Program
+136,MDE,Medical Device Engineering
+137,MED,Medicine
+138,MGT,Rady School of Management
+139,MGTA,Rady School of Management Business Analytics
+140,MGTF,Rady School of Management Finance
+141,MGTP,Rady School of Management Professional Accountancy
+142,MMW,Making of the Modern World
+143,MSED,Mathematics and Science Education
+144,MSP,Muir Special Projects
+145,MUIR,Muir College
+146,MUS,Music
+147,NANO,Nanoengineering
+148,NEU,Neurosciences
+149,NEUG,Neurosciences/ Graduate
+150,OBG,Obstetrics and Gynecology
+151,OPTH,Ophthalmology
+152,ORTH,Orthopedics
+153,PATH,Pathology
+154,PEDS,Pediatrics
+155,PHAR,Pharmacology
+156,PHIL,Philosophy
+157,PHYA,Physics/ Astronomy
+158,PHYS,Physics
+159,POLI,Political Science
+160,PSY,Psychiatry
+161,PSYC,Psychology
+162,RAD,Radiology
+163,RELI,"Religion, Study of"
+164,REV,Revelle College
+165,RMAS,Radiation Medicine and Applied Sciences
+166,RMED,Reproductive Medicine
+167,SE,Structural Engineering
+168,SEV,Seventh College
+169,SIO,Scripps Institution of Oceanography
+170,SIOB,Scripps Institution of Oceanography/ Ocean Biosciences Program
+171,SIOC,
+172,SIOG,
+173,SOCE,Sociology/ Individual Research and Honors Project
+174,SOCG,Sociology/ Graduate
+175,SOCI,Sociology
+176,SOCL,Sociology/ Lower Division
+177,SOMC,School of Medicine Core Courses
+178,SOMI,School of Medicine Interdisciplinary
+179,SPPH,SSPPS/ Pharmaceutical Sciences
+180,SPPS,Pharmacy
+181,SURG,Surgery
+182,SXTH,Sixth College
+183,SYN,Synthesis Program
+184,TDAC,Theatre/ Acting
+185,TDDE,Theatre/ Design
+186,TDDM,Dance/ Dance Making
+187,TDDR,Theatre/ Directing and Stage Management
+188,TDGE,Theatre/ General
+189,TDGR,Theatre/ Graduate
+190,TDHD,Dance/ History
+191,TDHT,Theatre/ History & Theory
+192,TDMV,Dance/ Movement
+193,TDPF,Dance/ Performance
+194,TDPR,Theatre Dance/ Practicum
+195,TDPW,Theatre/ Playwriting
+196,TDTR,Dance/ Theory
+197,TKS,Transnational Korean Studies
+198,TMC,Thurgood Marshall College
+199,TWS,Third World Studies
+200,UROL,Urology
+201,USP,Urban Studies and Planning
+202,VIS,Visual Arts
+203,WARR,Warren College
+204,WCWP,Warren College Writing Program
+205,WES,Wireless Embedded Systems

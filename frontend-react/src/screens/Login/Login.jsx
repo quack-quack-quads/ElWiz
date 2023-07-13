@@ -25,6 +25,7 @@ const Login = () => {
   const [waiting, setWaiting] = useState(false);
 
   const handleLoginResponse = (response) => {
+    console.log(response)
     if (response.status == 200) {
       let data = response.data;
       let userData = {
@@ -45,8 +46,8 @@ const Login = () => {
         handleLoginResponse(response);
       })
       .catch((error) => {
-        error.response?.data?.message !== null ? toast.error(error.response.data.message) 
-        : toast.error("Invalid credentials. Please try again with valid ones.");
+        error.response?.data?.message !== null ? toast.error(error.response.data.message)
+          : toast.error("Invalid credentials. Please try again with valid ones.");
       })
       .finally(() => {
         setWaiting(false);

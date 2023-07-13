@@ -2,13 +2,24 @@ spring :
   application:
     name : api-gateway
 
+  cloud:
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedHeaders:
+              - content-type
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+
 server :
   port : 8001
 
 eureka : 
   client : 
     serviceUrl : 
-      defaultZone : ${NAMING_SERVER_URL}
-
-
-
+      defaultZone : http://localhost:8761/eureka
