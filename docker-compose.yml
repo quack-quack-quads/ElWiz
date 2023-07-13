@@ -59,14 +59,14 @@ services:
     env_file:
       - ./ElWiz-APIGateway/.env
 
-  frontend:
-    container_name: frontend
-    image: rohitshah1706/elwiz:frontend-react-latest
-    restart: always
-    ports:
-      - 80:80
-    env_file:
-      - ./frontend-react/.env
+  # frontend:
+  #   container_name: frontend
+  #   image: rohitshah1706/elwiz:frontend-react-latest
+  #   restart: always
+  #   ports:
+  #     - 80:80
+  #   env_file:
+  #     - ./frontend-react/.env
 
 # volumes:
 #   db-data:

@@ -4,17 +4,23 @@ import { VITE_API_GATEWAY_BASE_URL } from "../config";
 export const loginUserAPICall = (values) => {
   const data = JSON.stringify(values);
 
-  const config = {
-    method: "post",
-    maxBodyLength: Infinity,
-    url: `${VITE_API_GATEWAY_BASE_URL}/auth-service/v1/login`,
+  // const config = {
+  //   method: "post",
+  //   maxBodyLength: Infinity,
+  //   url: `${VITE_API_GATEWAY_BASE_URL}/auth-service/v1/login`,
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  //   data: data,
+  // };
+
+  // return axios.request(config);
+  return axios.post(`${VITE_API_GATEWAY_BASE_URL}/auth-service/v1/login`, data, {
     headers: {
       "Content-Type": "application/json",
     },
-    data: data,
-  };
-
-  return axios.request(config);
+    withCredentials: true
+  })
 };
 
 export const signupUserAPICall = (values) => {

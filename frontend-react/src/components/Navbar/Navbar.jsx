@@ -23,7 +23,7 @@ const Navbar = () => {
     logoutUserAPICall()
     .then((response)=>{
       console.log(response.data)
-      dispatcher(logout)
+      dispatcher(logout())
       setAuth(false)
       navigate("/") 
     }).catch((error)=>{
