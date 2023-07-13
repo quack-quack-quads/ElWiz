@@ -19,7 +19,6 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("/auth-service/v1")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequiredArgsConstructor
 public class AuthController {
     private final AuthService authService;

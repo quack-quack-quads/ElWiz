@@ -29,7 +29,6 @@ services:
     image: rohitshah1706/elwiz:elective-service-latest
     restart: always
     depends_on:
-      # - postgres
       - naming-server
     ports:
       - 8100:8100
@@ -41,7 +40,6 @@ services:
     image: rohitshah1706/elwiz:auth-service-latest
     restart: always
     depends_on:
-      # - postgres
       - naming-server
     ports:
       - 7070:7070
@@ -70,17 +68,5 @@ services:
     env_file:
       - ./frontend-react/.env
 
-  # frontend:
-  #   container_name: frontend
-  #   build: ./frontend-react
-  #   ports:
-  #     - 80:5173
-  #   volumes:
-  #     - ./frontend-react:/app
-  #     - /app/node_modules
-  #   env_file:
-  #     - ./frontend-react/.env
-  #   command: npm run dev
-
-volumes:
-  db-data:
+# volumes:
+#   db-data:
