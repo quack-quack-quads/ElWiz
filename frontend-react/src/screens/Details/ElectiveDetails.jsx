@@ -6,7 +6,8 @@ import { FaTrash } from "react-icons/fa";
 import {
   addElectiveByIdAPICall,
   fetchElectiveDetailsAPICall,
-  fetchElectiveStudentsAPICall
+  fetchElectiveStudentsAPICall,
+  removeStudentElectiveById
 } from "../../services"
 
 const ElectiveDetails = ({
@@ -49,6 +50,30 @@ const ElectiveDetails = ({
       setElectiveStudents([...electiveStudents, newStudent]);
     }
     setNewStudent({});
+  }
+
+  const handleRemoveStudent = async (studentId) => {
+    const dissociationObject = {
+      studentId: studentId,
+      electiveId: electiveDetails.code,
+    }
+    try {
+      const response = await removeStudentElectiveById(dissociationObject);
+      if (response.status === 200) {
+        setElectiveStudents(electiveStudents.filter(
+          (electiveStudent) => electiveStudent.email !== studentId
+        ))
+        // update the possibleNewStudents
+        const possibleNewStudents = students.filter(
+          (student) => !electiveStudents.some(
+            (electiveStudent) => electiveStudent.email === student.email
+          )
+        )
+        setPossibleNewStudents(possibleNewStudents);
+      }
+    } catch (error) { 
+      console.log(error);
+    }
   }
 
   return (
@@ -128,7 +153,9 @@ const ElectiveDetails = ({
                         <td>{student.email}</td>
                         <td>{student.phoneNumber}</td>
                         <td>
-                          <Button className="btn-primary">
+                          <Button className="btn-primary" onClick={() => {
+                            handleRemoveStudent(student.email)
+                          }}>
                             <FaTrash />
                           </Button>
                         </td>

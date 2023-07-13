@@ -34,7 +34,8 @@ public class AuthController {
         if (Objects.nonNull(authResponse)) {
             Number maxAge = 1000 * 60 * 60 * 24; // 24 hours
             Cookie cookie = new Cookie("jwt", authResponse.getToken());
-            cookie.setHttpOnly(true);
+            // allow cookie to be from both http and https
+            cookie.setSecure(false);
             cookie.setPath("/");
             cookie.setMaxAge(1000 * 60);
             response.addCookie(cookie);

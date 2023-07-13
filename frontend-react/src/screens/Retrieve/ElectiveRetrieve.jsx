@@ -60,6 +60,7 @@ const ElectiveRetrieve = ({
 							<th>Code</th>
 							<th>Name</th>
 							<th>Description</th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -124,33 +125,6 @@ const ElectiveRetrieve = ({
 										elective.description
 									)}
 								</td>
-								{/* <td
-									onDoubleClick={() =>
-										handleDoubleClick(
-											elective.description,
-											"description"
-										)
-									}
-								>
-									{editing.code === elective.code &&
-									editing.field === "description" ? (
-										<input
-											type="text"
-											defaultValue={elective.description}
-											onBlur={(event) =>
-												handleBlur(
-													elective.code,
-													"description",
-													event.target.value,
-													"name",
-													elective.name
-												)
-											}
-										/>
-									) : (
-										elective.description
-									)}
-								</td> */}
 							</tr>
 						))}
 					</tbody>

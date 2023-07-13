@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/elective-service/elective")
+//@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ElectiveController {
 
     @Autowired

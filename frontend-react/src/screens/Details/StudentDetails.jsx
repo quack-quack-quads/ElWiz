@@ -7,6 +7,7 @@ import {
 	fetchStudentDetailsAPICall,
 	fetchStudentElectivesAPICall,
 	addElectiveByIdAPICall,
+	removeStudentElectiveById
 } from "../../services";
 
 const StudentDetails = ({ electives }) => {
@@ -49,6 +50,33 @@ const StudentDetails = ({ electives }) => {
 		}
 		setNewElective({});
 	};
+
+	const handleRemoveElective = async (electiveId) => {
+		const dissociationObject = {
+			studentId: studentDetails.email,
+			electiveId: electiveId,
+		}
+		try {
+			const response = await removeStudentElectiveById(dissociationObject);
+			if (response.status === 200) {
+				const newStudentElectives = studentElectives.filter(
+					(elective) => elective.code !== electiveId
+				);
+				setStudentElectives(newStudentElectives);
+				// update the possible new electives
+				const possibleNewElectives = electives.filter(
+					(elective) =>
+						!newStudentElectives.some(
+							(studentElective) =>
+								studentElective.code === elective.code
+						)
+				);
+				setPossibleNewElectives(possibleNewElectives);
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	}
 
 	return (
 		<div className="container tableWrapper">
@@ -133,7 +161,9 @@ const StudentDetails = ({ electives }) => {
 												<td>{elective.name}</td>
 												<td>{elective.description}</td>
 												<td>
-													<Button className="btn-primary">
+													<Button className="btn-primary" onClick={() => {
+														handleRemoveElective(elective.code);
+													}}>
 														<FaTrash />
 													</Button>
 												</td>

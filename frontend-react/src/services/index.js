@@ -66,7 +66,7 @@ export const fetchElectiveListAPICall = () => {
     headers: {
       "Content-Type": "application/json",
     }
-  }
+  } 
 
   return axios.request(config);
 }
@@ -157,6 +157,47 @@ export const addElectiveByIdAPICall = (associationObject) => {
   let data = JSON.stringify(associationObject);
   let config = {
     method: "post",
+    maxBodyLength: Infinity,
+    url: `${VITE_API_GATEWAY_BASE_URL}/elective-service/student/elective`,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: data
+  }
+
+  return axios.request(config);
+}
+
+export const deleteStudentByIdAPICall = (emailId) => {
+  let config = {
+    method: "delete",
+    maxBodyLength: Infinity,
+    url: `${VITE_API_GATEWAY_BASE_URL}/elective-service/student/${emailId}`,
+    headers: {
+      "Content-Type": "application/json",
+    }
+  }
+
+  return axios.request(config);
+}
+
+export const deleteElectiveByIdAPICall = (code) => {
+  let config = {
+    method: "delete",
+    maxBodyLength: Infinity,
+    url: `${VITE_API_GATEWAY_BASE_URL}/elective-service/elective/${code}`,
+    headers: {
+      "Content-Type": "application/json",
+    }
+  }
+
+  return axios.request(config);
+}
+
+export const removeStudentElectiveById = (dissociationObject) => {
+  let data = JSON.stringify(dissociationObject);
+  let config = {
+    method: "delete",
     maxBodyLength: Infinity,
     url: `${VITE_API_GATEWAY_BASE_URL}/elective-service/student/elective`,
     headers: {

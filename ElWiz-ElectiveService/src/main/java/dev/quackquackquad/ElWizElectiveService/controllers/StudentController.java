@@ -14,6 +14,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/elective-service/student")
+//@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class StudentController {
     @Autowired
     private StudentService studentService;

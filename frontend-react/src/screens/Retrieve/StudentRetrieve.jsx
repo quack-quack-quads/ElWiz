@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { Table } from "react-bootstrap";
+import { Table, Button } from "react-bootstrap";
+import { FaTrash } from "react-icons/fa";
 
-import { updateStudentDetails } from "../../services";
+import { updateStudentDetails, deleteStudentByIdAPICall } from "../../services";
 import { setStudents } from "../../store";
 import "./table.scss";
 const StudentRetrieve = ({
@@ -37,16 +38,31 @@ const StudentRetrieve = ({
 		}
 	};
 
+	const handleDeleteStudent = async (email) => {
+		try {
+			const response = await deleteStudentByIdAPICall(email);
+			if (response.status === 200) {
+				const newStudentList = students.filter(
+					(student) => student.email !== email
+				);
+				dispatch(setStudents(newStudentList));
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
 	return (
 		<div className="container tableWrapper">
 			<h1>Student List</h1>
-			<div className="purplebg">
+			<div className="tableBg">
 				<Table striped bordered hover>
 					<thead>
 						<tr>
 							<th>Email</th>
 							<th>Name</th>
 							<th>Phone Number</th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -110,6 +126,13 @@ const StudentRetrieve = ({
 									) : (
 										student.phoneNumber
 									)}
+								</td>
+								<td>
+									<Button className="btn-primary" onClick={() => {
+										handleDeleteStudent(student.email);
+									}}>
+										<FaTrash />
+									</Button>
 								</td>
 							</tr>
 						))}
