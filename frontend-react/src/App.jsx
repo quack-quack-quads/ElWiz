@@ -18,8 +18,10 @@ import ElectiveDetails from "./screens/Details/ElectiveDetails";
 
 import { fetchStudentListAPICall, fetchElectiveListAPICall } from "./services";
 import { setElectives, setStudents } from "./store";
+import { VITE_ENV_TRIAL } from "./config"
 
 function App() {
+	console.log("Showing env variable", VITE_ENV_TRIAL)
 	const dispatch = useDispatch();
 	const students = useSelector((state) => state.students);
 	const electives = useSelector((state) => state.electives);
