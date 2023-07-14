@@ -1,135 +1,74 @@
 import axios from "axios";
 import { VITE_API_GATEWAY_BASE_URL } from "../config";
 
-export const loginUserAPICall = (values) => {
-  return axios.post(`${VITE_API_GATEWAY_BASE_URL}/auth-service/v1/login`, values, {
+const createAxiosRequest = (method, url, data) => {
+  return axios({
+    method,
+    url,
+    data,
     headers: {
       "Content-Type": "application/json",
     },
-  })
+    withCredentials: true,
+  });
+}
+
+export const loginUserAPICall = (values) => {
+  return createAxiosRequest("post", `${VITE_API_GATEWAY_BASE_URL}/auth-service/v1/login`, values);
 };
 
 export const signupUserAPICall = (values) => {
-  return axios.post(`${VITE_API_GATEWAY_BASE_URL}/auth-service/v1/signup`, values, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
+  return createAxiosRequest("post", `${VITE_API_GATEWAY_BASE_URL}/auth-service/v1/signup`, values);
 }
 
 export const logoutUserAPICall = () => {
-  return axios.get(`${VITE_API_GATEWAY_BASE_URL}/auth-service/v1/logout`, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-    withCredentials: true,
-  })
+  return createAxiosRequest("get", `${VITE_API_GATEWAY_BASE_URL}/auth-service/v1/logout`);
 }
 
 export const fetchStudentListAPICall = () => {
-  return axios.get(`${VITE_API_GATEWAY_BASE_URL}/elective-service/student`, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-    withCredentials: true,
-  })
+  return createAxiosRequest("get", `${VITE_API_GATEWAY_BASE_URL}/elective-service/student`);
 }
 
 export const fetchElectiveListAPICall = () => {
-  return axios.get(`${VITE_API_GATEWAY_BASE_URL}/elective-service/elective`, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-    withCredentials: true,
-  })
+  return createAxiosRequest("get", `${VITE_API_GATEWAY_BASE_URL}/elective-service/elective`);
 }
 
 export const fetchStudentDetailsAPICall = (emailId) => {
-  return axios.get(`${VITE_API_GATEWAY_BASE_URL}/elective-service/student/${emailId}`, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-    withCredentials: true,
-  })
+  return createAxiosRequest("get", `${VITE_API_GATEWAY_BASE_URL}/elective-service/student/${emailId}`);
 }
 
 export const fetchElectiveDetailsAPICall = (code) => {
-  return axios.get(`${VITE_API_GATEWAY_BASE_URL}/elective-service/elective/${code}`, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-    withCredentials: true,
-  })
+  return createAxiosRequest("get", `${VITE_API_GATEWAY_BASE_URL}/elective-service/elective/${code}`);
 }
 
 export const fetchStudentElectivesAPICall = (emailId) => {
-  return axios.get(`${VITE_API_GATEWAY_BASE_URL}/elective-service/student/${emailId}/elective`, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-    withCredentials: true,
-  })
+  return createAxiosRequest("get", `${VITE_API_GATEWAY_BASE_URL}/elective-service/student/${emailId}/elective`);
 }
 
 export const fetchElectiveStudentsAPICall = (code) => {
-  return axios.get(`${VITE_API_GATEWAY_BASE_URL}/elective-service/elective/${code}/student`, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-    withCredentials: true,
-  })
+  return createAxiosRequest("get", `${VITE_API_GATEWAY_BASE_URL}/elective-service/elective/${code}/student`);
 }
 
 export const updateStudentDetails = (studentObject) => {
-  return axios.put(`${VITE_API_GATEWAY_BASE_URL}/elective-service/student`, studentObject, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-    withCredentials: true,
-  })
+  return createAxiosRequest("put", `${VITE_API_GATEWAY_BASE_URL}/elective-service/student`, studentObject);
 }
 
 export const updateElectiveDetails = (electiveObject) => {
-  return axios.put(`${VITE_API_GATEWAY_BASE_URL}/elective-service/elective`, electiveObject, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-    withCredentials: true,
-  })
+  return createAxiosRequest("put", `${VITE_API_GATEWAY_BASE_URL}/elective-service/elective`, electiveObject);
 }
 
 export const addElectiveByIdAPICall = (associationObject) => {
-  return axios.post(`${VITE_API_GATEWAY_BASE_URL}/elective-service/student/elective`, associationObject, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-    withCredentials: true,
-  })
+  return createAxiosRequest("post", `${VITE_API_GATEWAY_BASE_URL}/elective-service/student/elective`, associationObject);
 }
 
 export const deleteStudentByIdAPICall = (emailId) => {
-  return axios.delete(`${VITE_API_GATEWAY_BASE_URL}/elective-service/student/${emailId}`, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-    withCredentials: true,
-  })
+  return createAxiosRequest("delete", `${VITE_API_GATEWAY_BASE_URL}/elective-service/student/${emailId}`);
 }
 
 export const deleteElectiveByIdAPICall = (code) => {
-  return axios.delete(`${VITE_API_GATEWAY_BASE_URL}/elective-service/elective/${code}`, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-    withCredentials: true,
-  })
+  return createAxiosRequest("delete", `${VITE_API_GATEWAY_BASE_URL}/elective-service/elective/${code}`);
 }
 
 export const removeStudentElectiveById = (dissociationObject) => {
-  return axios.delete(`${VITE_API_GATEWAY_BASE_URL}/elective-service/student/elective`, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-    withCredentials: true,
-  })
+  return createAxiosRequest("delete", `${VITE_API_GATEWAY_BASE_URL}/elective-service/student/elective`, dissociationObject);
 }

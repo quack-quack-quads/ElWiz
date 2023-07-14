@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../store";
 import { logoutUserAPICall } from "../../services"
 import { useEffect, useState } from "react";
+import Cookie from "js-cookie";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ const Navbar = () => {
   const logoutUser = ()=>{
     logoutUserAPICall()
     .then((response)=>{
-      console.log(response.data)
+      Cookie.remove("jwt")
       dispatcher(logout())
       setAuth(false)
       navigate("/") 

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import Cookie from "js-cookie"
 
 import './Login.scss'
 import Wizard from '../../assets/wizard.png'
@@ -31,6 +32,7 @@ const Login = () => {
         name: data.user.name,
         email: data.user.email,
       };
+      Cookie.set("jwt", data.token);
       dispatch(login(userData));
       navigate("/dash");
     } else {

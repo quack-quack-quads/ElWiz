@@ -21,6 +21,8 @@ services:
     restart: always
     ports:
       - 8761:8761
+    networks:
+      - elwiz-network
     env_file:
       - ./ElWiz-NamingServer/.env
     
@@ -32,6 +34,8 @@ services:
       - naming-server
     ports:
       - 8100:8100
+    networks:
+      - elwiz-network
     env_file:
       - ./ElWiz-ElectiveService/.env
 
@@ -43,10 +47,12 @@ services:
       - naming-server
     ports:
       - 7070:7070
+    networks:
+      - elwiz-network
     env_file:
       - ./ElWiz-AuthService/.env
 
-  apiGateway:
+  api-gateway:
     container_name: api-gateway
     image: rohitshah1706/elwiz:api-gateway-latest
     restart: always
@@ -56,17 +62,24 @@ services:
       - auth-service
     ports:
       - 8001:8001
+    networks:
+      - elwiz-network
     env_file:
       - ./ElWiz-APIGateway/.env
 
-  # frontend:
-  #   container_name: frontend
-  #   image: rohitshah1706/elwiz:frontend-react-latest
-  #   restart: always
-  #   ports:
-  #     - 80:80
-  #   env_file:
-  #     - ./frontend-react/.env
+  frontend:
+    container_name: frontend
+    image: rohitshah1706/elwiz:frontend-react-latest
+    restart: always
+    ports:
+      - 80:80
+    networks:
+      - elwiz-network
+    env_file:
+      - ./frontend-react/.env
 
 # volumes:
 #   db-data:
+
+networks:
+  elwiz-network:
