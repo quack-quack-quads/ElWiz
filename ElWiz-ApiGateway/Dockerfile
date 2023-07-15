@@ -7,7 +7,7 @@ COPY pom.xml .
 RUN mvn dependency:go-offline
 
 COPY src ./src
-RUN mvn clean install 
+RUN mvn clean install
 
 # Stage 2: Run the java application
 FROM openjdk:17-alpine3.14 as production-stage
@@ -15,6 +15,9 @@ FROM openjdk:17-alpine3.14 as production-stage
 WORKDIR /app
 
 COPY --from=build-stage /app/target/ElWiz-ApiGateway.jar ElWiz-ApiGateway.jar
+
+# Copy the keystore file
+COPY qqqkeystore.p12 qqqkeystore.p12
 
 # create .aws credentials file for aws cli
 RUN mkdir ~/.aws

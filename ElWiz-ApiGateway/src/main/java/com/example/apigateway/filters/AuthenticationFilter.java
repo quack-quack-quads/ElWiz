@@ -31,6 +31,9 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
                 String token = null;
                 try{
                     List<HttpCookie> cookies = exchange.getRequest().getCookies().get("jwt");
+                    for(HttpCookie cookie : cookies){
+                        System.out.println(String.format("name : %s, value : %s", cookie.getName(), cookie.getValue()));
+                    }
                     token = cookies.get(0).getValue();
                 }catch(Exception e){
                     throw new CookieNotFoundException("Auth cookie not found");
@@ -53,5 +56,6 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
     }
 
     public static class Config{
+        
     }
 }

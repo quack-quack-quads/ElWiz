@@ -1,5 +1,9 @@
 import { useState } from 'react'
 import CreateForm from '../../components/CreateForm/CreateForm'
+import Success from '../../components/Success/Success'
+import { createStudentAPICall } from '../../services'
+import { useDispatch, useSelector } from "react-redux";
+import { setStudents } from '../../store';
 
 const StudentCreate = ()=>{
     const [name, setName] = useState("")
@@ -22,11 +26,40 @@ const StudentCreate = ()=>{
             action : setPhone
         }
     ]
+
+    const students = useSelector(state => state.students);
+    const dispatch = useDispatch();
+
+    const create = ()=>{
+        console.log(JSON.stringify({
+            name : name, 
+            email : email,
+            phoneNumber : phone
+        }));
+        createStudentAPICall(JSON.stringify({
+            name : name, 
+            email : email,
+            phoneNumber : phone
+        })).then((response)=>{
+            if(response.status === 200){
+                const newStudentList =[...students, response.data]
+                dispatch(setStudents(newStudentList))
+                setMode(true)
+            }
+        }).catch((error)=>{
+            console.log(error)
+        })
+    }
+
+    const [mode, setMode] = useState(false)
+
+    if(mode) return <Success message={"Successfully created student"}/>
     return <CreateForm 
             fields={fields} 
             entity="Student"
             heading={"Create a new Student"}
             description={"Fill in the following details to enter a new student into the database."}
+            submithandler={create}
         />
 }
 

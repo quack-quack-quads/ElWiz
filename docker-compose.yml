@@ -25,6 +25,21 @@ services:
       - elwiz-network
     env_file:
       - ./ElWiz-NamingServer/.env
+
+  api-gateway:
+    container_name: api-gateway
+    image: rohitshah1706/elwiz:api-gateway-latest
+    restart: always
+    depends_on:
+      - naming-server
+    #   - elective-service
+    #   - auth-service
+    ports:
+      - 8001:8001
+    networks:
+      - elwiz-network
+    env_file:
+      - ./ElWiz-ApiGateway/.env
     
   elective-service:
     container_name: elective-service
@@ -51,21 +66,6 @@ services:
       - elwiz-network
     env_file:
       - ./ElWiz-AuthService/.env
-
-  api-gateway:
-    container_name: api-gateway
-    image: rohitshah1706/elwiz:api-gateway-latest
-    restart: always
-    depends_on:
-      - naming-server
-      - elective-service
-      - auth-service
-    ports:
-      - 8001:8001
-    networks:
-      - elwiz-network
-    env_file:
-      - ./ElWiz-APIGateway/.env
 
   frontend:
     container_name: frontend

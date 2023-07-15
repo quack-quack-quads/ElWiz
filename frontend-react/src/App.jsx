@@ -8,6 +8,9 @@ import Login from "./screens/Login/Login";
 import Signup from "./screens/Signup/Signup";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
+
+// import Carousel from "./components/Carousel/Carousel";
+
 import Dash from "./screens/Dash/Dash";
 import StudentCreate from "./screens/Create/StudentCreate";
 import ElectiveCreate from "./screens/Create/ElectiveCreate";
@@ -19,6 +22,7 @@ import ElectiveDetails from "./screens/Details/ElectiveDetails";
 import { fetchStudentListAPICall, fetchElectiveListAPICall } from "./services";
 import { setElectives, setStudents } from "./store";
 import { VITE_ENV_TRIAL } from "./config";
+
 
 function App() {
 	console.log("Showing env variable", VITE_ENV_TRIAL);
@@ -79,7 +83,7 @@ function App() {
 				dispatch(setElectives(data));
 			});
 		}
-	}, [user]);
+	}, []);
 	return (
 		<div className="App">
 			<Router>
@@ -110,6 +114,8 @@ function App() {
 						element={<ElectiveDetails students={students} />}
 					/>
 					<Route path="/" element={<Lander />} />
+
+					{/* <Route path="/cdev" element={<Carousel />} /> */}
 				</Routes>
 				<Footer />
 			</Router>

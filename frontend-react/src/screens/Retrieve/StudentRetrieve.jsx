@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Table, Button } from "react-bootstrap";
@@ -7,9 +7,7 @@ import { FaTrash } from "react-icons/fa";
 import { updateStudentDetails, deleteStudentByIdAPICall } from "../../services";
 import { setStudents } from "../../store";
 import "./table.scss";
-const StudentRetrieve = ({
-	students,
-}) => {
+const StudentRetrieve = ({students}) => {
 	const dispatch = useDispatch();
 	const [editing, setEditing] = useState({});
 

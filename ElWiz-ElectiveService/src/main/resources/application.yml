@@ -10,6 +10,10 @@ spring:
   application :
     name : elective-service
 
+springdoc:
+  swagger-ui:
+    path: /elective-service/docs
+
   jpa:
     hibernate:
       ddl-auto: update

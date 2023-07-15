@@ -18,32 +18,32 @@ public class ElectiveController {
     private ElectiveService electiveService;
 
     @PostMapping
-    public Elective addElective(@RequestBody Elective elective){
+    public Elective addElective(@RequestBody Elective elective) {
         return electiveService.addElective(elective);
     }
 
     @GetMapping
-    public List<Elective> getAllElectives(){
+    public List<Elective> getAllElectives() {
         return electiveService.getAllElectives();
     }
 
     @GetMapping("/{id}")
-    public Elective getElectiveById(@PathVariable String id){
+    public Elective getElectiveById(@PathVariable String id) {
         return electiveService.getElectiveById(id);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteElectiveById(@PathVariable String id){
+    public void deleteElectiveById(@PathVariable String id) {
         electiveService.deleteElectiveById(id);
     }
 
     @PutMapping
-    public Elective updateElective(@RequestBody Elective elective){
+    public Elective updateElective(@RequestBody Elective elective) {
         return electiveService.addElective(elective);
     }
 
     @GetMapping("/{electiveId}/student")
-    public List<Student> getStudentsByElectiveId(@PathVariable String electiveId){
+    public List<Student> getStudentsByElectiveId(@PathVariable String electiveId) {
         return electiveService.getStudentsByElectiveId(electiveId);
     }
 }
