@@ -35,7 +35,7 @@ const Lander = () => {
 
   return (
     <div className="Lander">
-      <Hero />
+      <Hero data-testid = "hero"/>
     </div>
   );
 };

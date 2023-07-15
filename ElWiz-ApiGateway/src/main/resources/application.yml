@@ -8,13 +8,8 @@ spring :
         corsConfigurations:
           '[/**]':
             allowedOrigins: "*"
-            allowedHeaders:
-              - content-type
-            allowedMethods:
-              - GET
-              - POST
-              - PUT
-              - DELETE
+            allowedMethods: "*"
+            allowedHeaders : "*"
 
 server :
   port : 8001
@@ -29,3 +24,7 @@ eureka :
   client : 
     serviceUrl : 
       defaultZone : http://localhost:8761/eureka
+
+
+
+

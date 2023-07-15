@@ -29,6 +29,14 @@ export const fetchStudentListAPICall = () => {
   return createAxiosRequest("get", `${VITE_API_GATEWAY_BASE_URL}/elective-service/student`);
 }
 
+export const createElectiveAPICall = (values)=>{
+  return createAxiosRequest("post", `${VITE_API_GATEWAY_BASE_URL}/elective-service/elective`, values)
+}
+
+export const createStudentAPICall = (values)=>{
+  return createAxiosRequest("post", `${VITE_API_GATEWAY_BASE_URL}/elective-service/student`, values)
+}
+
 export const fetchElectiveListAPICall = () => {
   return createAxiosRequest("get", `${VITE_API_GATEWAY_BASE_URL}/elective-service/elective`);
 }

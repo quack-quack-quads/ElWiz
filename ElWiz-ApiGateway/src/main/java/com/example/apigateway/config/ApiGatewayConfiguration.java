@@ -44,14 +44,18 @@ public class ApiGatewayConfiguration {
         return builder.routes()
                 .route(
                         p -> p.path("/elective-service/**")
+<<<<<<< HEAD
                                 // .filters(spec -> spec.filter(authFilter))
                                 // .uri("lb://elective-service")
                                 .uri("http://ec2-34-224-94-59.compute-1.amazonaws.com:8100")
+=======
+                                .filters(spec -> spec.filter(authFilter))
+                                .uri("http://ec2-52-91-71-92.compute-1.amazonaws.com:8100")
+>>>>>>> a6d0cbb (merge)
                 )
                 .route(
                         p -> p.path("/auth-service/**")
-                                // .uri("lb://auth-service")
-                                .uri("http://ec2-34-224-94-59.compute-1.amazonaws.com:7070")
+                                .uri("http://ec2-52-91-71-92.compute-1.amazonaws.com:7070")
                 )
                 .build();
     }

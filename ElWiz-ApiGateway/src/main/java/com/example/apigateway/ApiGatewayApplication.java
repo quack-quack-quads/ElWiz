@@ -9,3 +9,6 @@ public class ApiGatewayApplication {
 		SpringApplication.run(ApiGatewayApplication.class, args);
 	}
 }
+//http://ec2-54-204-179-141.compute-1.amazonaws.com:8001
+
+

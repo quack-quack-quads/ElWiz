@@ -9,7 +9,7 @@ const CreateForm = ({ fields, entity, heading, description, submithandler}) => {
           <div className="heading on-primary-text text-center">{heading}</div>
           <div className="description text-center">{description}</div>
         </div>
-        <form className="CreateForm">
+        <div className="CreateForm">
           {fields.map((field) => {
             return (
               <MDBInput
@@ -28,7 +28,7 @@ const CreateForm = ({ fields, entity, heading, description, submithandler}) => {
           >
             Create {entity}
           </MDBBtn>
-        </form>
+        </div>
       </div>
     </div>
   );
