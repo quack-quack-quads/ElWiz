@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Table, Button, Card, Form } from "react-bootstrap";
+import { Table, Button, Card, Form, Spinner } from "react-bootstrap";
 import { FaTrash } from "react-icons/fa";
-
+import axios from "axios"
 import {
 	fetchStudentDetailsAPICall,
 	fetchStudentElectivesAPICall,
@@ -10,12 +10,23 @@ import {
 	removeStudentElectiveById
 } from "../../services";
 
+const recomBadge = () => {
+	return (
+		<div>
+			<a href="#">News <span class="badge">5</span></a><br></br>
+		</div>
+	)
+}
+
 const StudentDetails = ({ electives }) => {
 	const email = useParams().email;
 	const [possibleNewElectives, setPossibleNewElectives] = useState([]);
 	const [studentDetails, setStudentDetails] = useState({});
 	const [studentElectives, setStudentElectives] = useState([]);
 	const [newElective, setNewElective] = useState({});
+	const [predictions, setPredictions] = useState([])
+	const [fetched, setFetched] = useState(false)
+	const [waiting, setWaiting] = useState(true)
 
 	const fetchData = async () => {
 		const studentDetails = await fetchStudentDetailsAPICall(email);
@@ -25,8 +36,38 @@ const StudentDetails = ({ electives }) => {
 	};
 
 	useEffect(() => {
-		fetchData();
+		if(!fetched){
+			fetchData();
+			setFetched(true)
+		}
 	}, []);
+
+	useEffect(() => {
+		if (predictions.length === 0 && fetched) {
+			var bodyFormData = new FormData();
+			var sentence = ""
+			studentElectives.forEach((e)=>{
+				sentence += e.code.toString().trim() + " "
+			})
+			bodyFormData.append("sentence", sentence);
+			axios({
+				method: "post",
+				url: "https://gpt2-finetuned-updatednew-3m72qfxrbq-el.a.run.app/predict",
+				data: bodyFormData,
+				headers: { "Content-Type": "multipart/form-data" },
+			})
+				.then(function (response) {
+					//handle success
+					console.log(response);
+					setPredictions(response.data)
+					setWaiting(false)
+				})
+				.catch(function (response) {
+					//handle error
+					console.log(response);
+				});
+		}
+	})
 
 	useEffect(() => {
 		const possibleNewElectives = electives.filter(
@@ -140,6 +181,47 @@ const StudentDetails = ({ electives }) => {
 						</Card.Body>
 					</Card>
 				</div>
+
+
+
+				<div className="col-md-12">
+					<Card>
+						<Card.Body>
+							<h2>Recommended Electives</h2>
+							{
+								waiting ? 
+								<Spinner style={{"margin" : "40px"}}/> : 
+								<div className="purplebg">
+								<Table striped bordered hover>
+									<thead>
+										<tr>
+											<th>Code</th>
+											<th>Name</th>
+											<th>Description</th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody>
+										{predictions.map((elective) => (
+											<tr key={elective.Code}>
+												<td>{elective.Code}</td>
+												<td>{elective.Course}</td>
+												<td>{elective.Details}</td>
+												<td>
+													<span className="recommended">Recommended</span>
+												</td>
+											</tr>
+										))}
+									</tbody>
+								</Table>
+							</div>
+							}
+						</Card.Body>
+					</Card>
+				</div>
+
+
+
 				<div className="col-md-12">
 					<Card>
 						<Card.Body>
