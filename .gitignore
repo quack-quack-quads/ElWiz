@@ -3,5 +3,11 @@
 .env
 application.properties
 application.yml
+node_modules
+models
+Lib
+__pycache__
+checkpoint
+Include
 *.pem
 *.ppk

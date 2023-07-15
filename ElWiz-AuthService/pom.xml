@@ -121,6 +121,13 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+					<environmentVariables>
+                      <!-- add them here -->
+                       <DB_URL>jdbc:postgresql://dpg-cieq2jdgkuvlk1hui6qg-a.singapore-postgres.render.com:5432/elwiz</DB_URL>
+					   <DB_USERNAME>root</DB_USERNAME>
+					   <DB_PASSWORD>X5hFqsXSCJqnfHej5JDVvzH2zU16hA4O</DB_PASSWORD>
+                      <!-- -->
+                    </environmentVariables>
 				</configuration>
 			</plugin>
 		</plugins>
