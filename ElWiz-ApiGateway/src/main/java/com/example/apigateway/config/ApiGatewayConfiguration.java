@@ -14,6 +14,7 @@ import org.springframework.web.cors.reactive.CorsConfigurationSource;
 import org.springframework.web.cors.reactive.CorsWebFilter;
 import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 
+import java.net.URI;
 import java.util.Collections;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class ApiGatewayConfiguration {
     @Bean
     public CorsWebFilter corsWebFilter() {
         CorsConfiguration corsConfig = new CorsConfiguration();
-        corsConfig.setAllowedOrigins(List.of("http://localhost:5173", "http://localhost")); // Add your React app's origin here
+        corsConfig.setAllowedOrigins(List.of("http://localhost:5173", "http://localhost", "http://ec2-44-200-182-122.compute-1.amazonaws.com")); // Add your React app's origin here
         corsConfig.setMaxAge(3600L);
         corsConfig.addAllowedMethod("*");
         corsConfig.addAllowedHeader("*");
@@ -44,11 +45,13 @@ public class ApiGatewayConfiguration {
                 .route(
                         p -> p.path("/elective-service/**")
                                 .filters(spec -> spec.filter(authFilter))
-                                .uri("lb://elective-service")
+                                // .uri("lb://elective-service")
+                                .uri("http://ec2-52-91-71-92.compute-1.amazonaws.com:8100")
                 )
                 .route(
                         p -> p.path("/auth-service/**")
-                                .uri("lb://auth-service")
+                                // .uri("lb://auth-service")
+                                .uri("http://ec2-52-91-71-92.compute-1.amazonaws.com:7070")
                 )
                 .build();
     }
