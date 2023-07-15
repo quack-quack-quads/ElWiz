@@ -8,7 +8,8 @@ import Wizard from '../../assets/wizard.png'
 
 import { useForm } from "../../hooks"
 import { login } from "../../store"
-import { loginUserAPICall } from "../../services"
+import { fetchStudentListAPICall, loginUserAPICall, fetchElectiveListAPICall} from "../../services"
+import { setStudents, setElectives } from '../../store'
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -25,7 +26,7 @@ const Login = () => {
 
   const [waiting, setWaiting] = useState(false);
 
-  const handleLoginResponse = (response) => {
+  const handleLoginResponse = async (response) => {
     console.log(response)
     if (response.status == 200) {
       let data = response.data;
@@ -35,13 +36,20 @@ const Login = () => {
       };
       Cookie.set("jwt", data.token);
       dispatch(login(userData));
+      await fetchStudentListAPICall().then((res)=>{
+        dispatch(setStudents(res.data))
+      });
+      await fetchElectiveListAPICall().then((res)=>{
+        dispatch(setElectives(res.data))
+      });
+      setWaiting(false)
       navigate("/dash");
     } else {
       throw new Error("Auth failed");
     }
   }
 
-  const loginUser = () => {
+  const loginUser = async () => {
     setWaiting(true);
     loginUserAPICall(values)
       .then((response) => {
@@ -51,9 +59,6 @@ const Login = () => {
         error.response?.data?.message !== null ? toast.error(error.response.data.message)
           : toast.error("Invalid credentials. Please try again with valid ones.");
       })
-      .finally(() => {
-        setWaiting(false);
-      });
   };
 
   const { onChange, onSubmit, values } = useForm(loginUser, initialState)
@@ -115,3 +120,7 @@ const Login = () => {
 };
 
 export default Login;
+
+
+// https://ec2-54-204-179-141.compute-1.amazonaws.com:8001/elective-service/student
+// https://main.d3mi9uffiw1j9y.amplifyapp.com/

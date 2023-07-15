@@ -69,7 +69,6 @@ const ElectiveRetrieve = ({
 						</tr>
 					</thead>
 					<tbody>
-
 						{electives.map((elective) => (
 							<tr key={elective.code}>
 								<td>
