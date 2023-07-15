@@ -26,7 +26,7 @@ public class ApiGatewayConfiguration {
     @Bean
     public CorsWebFilter corsWebFilter() {
         CorsConfiguration corsConfig = new CorsConfiguration();
-        corsConfig.setAllowedOrigins(List.of("http://localhost:5173", "http://localhost", "http://ec2-44-200-182-122.compute-1.amazonaws.com")); // Add your React app's origin here
+        corsConfig.setAllowedOrigins(List.of("http://localhost:5173", "http://localhost", "http://ec2-44-200-182-122.compute-1.amazonaws.com", "https://main.d3mi9uffiw1j9y.amplifyapp.com")); // Add your React app's origin here
         corsConfig.setMaxAge(3600L);
         corsConfig.addAllowedMethod("*");
         corsConfig.addAllowedHeader("*");
