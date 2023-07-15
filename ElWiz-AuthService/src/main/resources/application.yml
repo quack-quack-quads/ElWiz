@@ -10,6 +10,10 @@ spring:
   application :
     name : auth-service
 
+springdoc:
+  swagger-ui:
+    path: /auth-service/docs
+
   jpa:
     hibernate:
       ddl-auto: update
