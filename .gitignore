@@ -9,3 +9,5 @@ Lib
 __pycache__
 checkpoint
 Include
+*.pem
+*.ppk

@@ -1,169 +1,74 @@
 import axios from "axios";
 import { VITE_API_GATEWAY_BASE_URL } from "../config";
 
-export const loginUserAPICall = (values) => {
-  const data = JSON.stringify(values);
-
-  const config = {
-    method: "post",
-    maxBodyLength: Infinity,
-    url: `${VITE_API_GATEWAY_BASE_URL}/auth-service/v1/login`,
+const createAxiosRequest = (method, url, data) => {
+  return axios({
+    method,
+    url,
+    data,
     headers: {
       "Content-Type": "application/json",
     },
-    data: data,
-  };
+    withCredentials: true,
+  });
+}
 
-  return axios.request(config);
+export const loginUserAPICall = (values) => {
+  return createAxiosRequest("post", `${VITE_API_GATEWAY_BASE_URL}/auth-service/v1/login`, values);
 };
 
 export const signupUserAPICall = (values) => {
-  let data = JSON.stringify(values);
-		let config = {
-			method: "post",
-			maxBodyLength: Infinity,
-			url: `${VITE_API_GATEWAY_BASE_URL}/auth-service/v1/signup`,
-			headers: {
-				"Content-Type": "application/json",
-			},
-			data: data,
-		};
-  
-  return axios.request(config);
+  return createAxiosRequest("post", `${VITE_API_GATEWAY_BASE_URL}/auth-service/v1/signup`, values);
 }
 
 export const logoutUserAPICall = () => {
-  let config = {
-    method: "get",
-    maxBodyLength: Infinity,
-    url: `${VITE_API_GATEWAY_BASE_URL}/auth-service/v1/logout`,
-    headers: {
-      "Content-Type": "application/json",
-    }
-  }
-
-  return axios.request(config);
+  return createAxiosRequest("get", `${VITE_API_GATEWAY_BASE_URL}/auth-service/v1/logout`);
 }
 
 export const fetchStudentListAPICall = () => {
-  let config = {
-    method: "get",
-    maxBodyLength: Infinity,
-    url: `${VITE_API_GATEWAY_BASE_URL}/elective-service/student`,
-    headers: {
-      "Content-Type": "application/json",
-    }
-  }
-
-  return axios.request(config);
+  return createAxiosRequest("get", `${VITE_API_GATEWAY_BASE_URL}/elective-service/student`);
 }
 
 export const fetchElectiveListAPICall = () => {
-  let config = {
-    method: "get",
-    maxBodyLength: Infinity,
-    url: `${VITE_API_GATEWAY_BASE_URL}/elective-service/elective`,
-    headers: {
-      "Content-Type": "application/json",
-    }
-  }
-
-  return axios.request(config);
+  return createAxiosRequest("get", `${VITE_API_GATEWAY_BASE_URL}/elective-service/elective`);
 }
 
 export const fetchStudentDetailsAPICall = (emailId) => {
-  let config = {
-    method: "get",
-    maxBodyLength: Infinity,
-    url: `${VITE_API_GATEWAY_BASE_URL}/elective-service/student/${emailId}`,
-    headers: {
-      "Content-Type": "application/json",
-    }
-  }
-
-  return axios.request(config);
+  return createAxiosRequest("get", `${VITE_API_GATEWAY_BASE_URL}/elective-service/student/${emailId}`);
 }
 
 export const fetchElectiveDetailsAPICall = (code) => {
-  let config = {
-    method: "get",
-    maxBodyLength: Infinity,
-    url: `${VITE_API_GATEWAY_BASE_URL}/elective-service/elective/${code}`,
-    headers: {
-      "Content-Type": "application/json",
-    }
-  }
-
-  return axios.request(config);
+  return createAxiosRequest("get", `${VITE_API_GATEWAY_BASE_URL}/elective-service/elective/${code}`);
 }
 
 export const fetchStudentElectivesAPICall = (emailId) => {
-  let config = {
-    method: "get",
-    maxBodyLength: Infinity,
-    url: `${VITE_API_GATEWAY_BASE_URL}/elective-service/student/${emailId}/elective`,
-    headers: {
-      "Content-Type": "application/json",
-    }
-  }
-
-  return axios.request(config);
+  return createAxiosRequest("get", `${VITE_API_GATEWAY_BASE_URL}/elective-service/student/${emailId}/elective`);
 }
 
 export const fetchElectiveStudentsAPICall = (code) => {
-  let config = {
-    method: "get",
-    maxBodyLength: Infinity,
-    url: `${VITE_API_GATEWAY_BASE_URL}/elective-service/elective/${code}/student`,
-    headers: {
-      "Content-Type": "application/json",
-    }
-  }
-
-  return axios.request(config);
+  return createAxiosRequest("get", `${VITE_API_GATEWAY_BASE_URL}/elective-service/elective/${code}/student`);
 }
 
 export const updateStudentDetails = (studentObject) => {
-  let data = JSON.stringify(studentObject);
-  let config = {
-    method: "put",
-    maxBodyLength: Infinity,
-    url: `${VITE_API_GATEWAY_BASE_URL}/elective-service/student`,
-    headers: {
-      "Content-Type": "application/json",
-    },
-    data: data
-  }
-
-  return axios.request(config);
+  return createAxiosRequest("put", `${VITE_API_GATEWAY_BASE_URL}/elective-service/student`, studentObject);
 }
 
 export const updateElectiveDetails = (electiveObject) => {
-  let data = JSON.stringify(electiveObject);
-  let config = {
-    method: "put",
-    maxBodyLength: Infinity,
-    url: `${VITE_API_GATEWAY_BASE_URL}/elective-service/elective`,
-    headers: {
-      "Content-Type": "application/json",
-    },
-    data: data
-  }
-
-  return axios.request(config);
+  return createAxiosRequest("put", `${VITE_API_GATEWAY_BASE_URL}/elective-service/elective`, electiveObject);
 }
 
 export const addElectiveByIdAPICall = (associationObject) => {
-  let data = JSON.stringify(associationObject);
-  let config = {
-    method: "post",
-    maxBodyLength: Infinity,
-    url: `${VITE_API_GATEWAY_BASE_URL}/elective-service/student/elective`,
-    headers: {
-      "Content-Type": "application/json",
-    },
-    data: data
-  }
+  return createAxiosRequest("post", `${VITE_API_GATEWAY_BASE_URL}/elective-service/student/elective`, associationObject);
+}
 
-  return axios.request(config);
+export const deleteStudentByIdAPICall = (emailId) => {
+  return createAxiosRequest("delete", `${VITE_API_GATEWAY_BASE_URL}/elective-service/student/${emailId}`);
+}
+
+export const deleteElectiveByIdAPICall = (code) => {
+  return createAxiosRequest("delete", `${VITE_API_GATEWAY_BASE_URL}/elective-service/elective/${code}`);
+}
+
+export const removeStudentElectiveById = (dissociationObject) => {
+  return createAxiosRequest("delete", `${VITE_API_GATEWAY_BASE_URL}/elective-service/student/elective`, dissociationObject);
 }

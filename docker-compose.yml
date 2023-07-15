@@ -21,16 +21,36 @@ services:
     restart: always
     ports:
       - 8761:8761
+    networks:
+      - elwiz-network
+    env_file:
+      - ./ElWiz-NamingServer/.env
+
+  api-gateway:
+    container_name: api-gateway
+    image: rohitshah1706/elwiz:api-gateway-latest
+    restart: always
+    depends_on:
+      - naming-server
+    #   - elective-service
+    #   - auth-service
+    ports:
+      - 8001:8001
+    networks:
+      - elwiz-network
+    env_file:
+      - ./ElWiz-ApiGateway/.env
     
   elective-service:
     container_name: elective-service
     image: rohitshah1706/elwiz:elective-service-latest
     restart: always
     depends_on:
-      # - postgres
       - naming-server
     ports:
       - 8100:8100
+    networks:
+      - elwiz-network
     env_file:
       - ./ElWiz-ElectiveService/.env
 
@@ -39,46 +59,27 @@ services:
     image: rohitshah1706/elwiz:auth-service-latest
     restart: always
     depends_on:
-      # - postgres
       - naming-server
     ports:
       - 7070:7070
+    networks:
+      - elwiz-network
     env_file:
       - ./ElWiz-AuthService/.env
 
-  apiGateway:
-    container_name: api-gateway
-    image: rohitshah1706/elwiz:api-gateway-latest
-    restart: always
-    depends_on:
-      - naming-server
-      - elective-service
-      - auth-service
-    ports:
-      - 8001:8001
-    env_file:
-      - ./ElWiz-APIGateway/.env
-
-  # frontend:
-  #   container_name: frontend
-  #   image: rohitshah1706/elwiz:frontend-react-latest
-  #   restart: always
-  #   ports:
-  #     - 80:80
-  #   env_file:
-  #     - ./frontend-react/.env
-
   frontend:
     container_name: frontend
-    build: ./frontend-react
+    image: rohitshah1706/elwiz:frontend-react-latest
+    restart: always
     ports:
-      - 80:5173
-    volumes:
-      - ./frontend-react:/app
-      - /app/node_modules
+      - 80:80
+    networks:
+      - elwiz-network
     env_file:
       - ./frontend-react/.env
-    command: npm run dev
 
-volumes:
-  db-data:
+# volumes:
+#   db-data:
+
+networks:
+  elwiz-network:

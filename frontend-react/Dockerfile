@@ -9,6 +9,11 @@ RUN npm install
 
 COPY . .
 
+# Set environment variables
+ARG VITE_API_GATEWAY_BASE_URL
+RUN touch .env
+RUN echo "VITE_API_GATEWAY_BASE_URL=$VITE_API_GATEWAY_BASE_URL" >> .env
+
 RUN ["npm", "run", "build"]
 
 # Stage 2: Serve built react app with nginx

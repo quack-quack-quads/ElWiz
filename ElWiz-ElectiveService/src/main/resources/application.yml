@@ -3,9 +3,9 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://dpg-cieq2jdgkuvlk1hui6qg-a.singapore-postgres.render.com:5432/elwiz
-    username: root
-    password: X5hFqsXSCJqnfHej5JDVvzH2zU16hA4O
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
 
   application :
     name : elective-service
@@ -24,5 +24,5 @@ spring:
 eureka :
   client :
     serviceUrl :
-      defaultZone : http://localhost:8761/eureka/
+      defaultZone : ${NAMING_SERVER_URL}
 
