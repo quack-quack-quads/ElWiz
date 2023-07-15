@@ -21,9 +21,7 @@ const Hero = () => {
             elective records, our application provides the tools you need for
             efficient data management. But that's not all! We also offer the
             ability to assign students to electives and vice versa, empowering
-            you to easily organize and track their academic journeys. Experience
-            the convenience and effectiveness of our application, and make
-            student and elective management a breeze!
+            you to easily organize and track their academic journeys. If that's not enough, you will surely like a boost to your electives-picking process using the power of <b>Machine Learning!!!</b>
           </div>
           <button className="btn btn-secondary align-self-end m-3"
             onClick={()=>{
