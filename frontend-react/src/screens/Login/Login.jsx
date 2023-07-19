@@ -57,8 +57,11 @@ const Login = () => {
         handleLoginResponse(response);
       })
       .catch((error) => {
-        error.response?.data?.message !== null ? toast.error(error.response.data.message)
-          : toast.error("Invalid credentials. Please try again with valid ones.");
+        try{
+          toast.error(error.response.data.message)
+        }catch{
+          toast.error("Invalid credentials. Please try again with valid ones.");
+        }
         setWaiting(false)
       })
   };
@@ -80,9 +83,10 @@ const Login = () => {
           <div className="form m-3 p-5 d-flex flex-column">
             <div className="formhead m-2">Email</div>
             <input
-              type="text"
+              type="email"
               className="form-control shadow-none"
               name='email'
+              data-testid="emailinp"
               onChange={onChange}
             />
             <div className="formhead m-2">Password</div>
@@ -90,10 +94,11 @@ const Login = () => {
               type="password"
               className="form-control shadow-none"
               name='password'
+              data-testid = "passinp"
               onChange={onChange}
             />
             {waiting ? (
-              <Spinner className="align-self-end m-2 on-primary-text" />
+              <Spinner className="align-self-end m-2 on-primary-text" data-testid = "spinner"/>
             ) : (
               <button
                 className="btn btn-primary align-self-end m-2"

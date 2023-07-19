@@ -38,6 +38,7 @@ const Navbar = () => {
         src={logo}
         alt="logo"
         className="navlogo align-self-start"
+        data-testid = "wizlogo"
         onClick={() => {
           if (auth) {
             navigate("/dash");
