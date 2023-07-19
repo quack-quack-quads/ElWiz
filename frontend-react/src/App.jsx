@@ -30,10 +30,11 @@ function App() {
 	const user = useSelector((state) => state.user);
 	const students = useSelector((state) => state.students);
 	const electives = useSelector((state) => state.electives);
+	const token = useSelector(state => state.token)
 
 	const fetchStudentList = async () => {
 		try {
-			const response = await fetchStudentListAPICall();
+			const response = await fetchStudentListAPICall(token);
 			return response.data;
 		} catch (error) {
 			console.log(error);
@@ -42,7 +43,7 @@ function App() {
 
 	const fetchElectiveList = async () => {
 		try {
-			const response = await fetchElectiveListAPICall();
+			const response = await fetchElectiveListAPICall(token);
 			return response.data;
 		} catch (error) {
 			console.log(error);

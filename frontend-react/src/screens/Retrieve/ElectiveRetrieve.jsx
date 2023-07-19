@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 import { Link } from "react-router-dom";
 import { Table, Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
@@ -23,6 +23,7 @@ const ElectiveRetrieve = ({ electives }) => {
   const handleDoubleClick = (code, field) => {
     setEditing({ code, field });
   };
+  const token = useSelector(state => state.token)
 
   const handleBlur = async (
     code,
@@ -38,7 +39,7 @@ const ElectiveRetrieve = ({ electives }) => {
         [field]: value,
         [otherField]: otherFieldValue,
       };
-      await updateElectiveDetails(newElectiveObject);
+      await updateElectiveDetails(newElectiveObject, token);
       const newElectiveList = electives.map((elective) => {
         if (elective.code === code) {
           return {
@@ -57,7 +58,7 @@ const ElectiveRetrieve = ({ electives }) => {
 
   const handleDeleteElective = async (code) => {
     try {
-      const response = await deleteElectiveByIdAPICall(code);
+      const response = await deleteElectiveByIdAPICall(code, token);
       if (response.status === 200) {
         const newElectiveList = electives.filter(
           (elective) => elective.code !== code

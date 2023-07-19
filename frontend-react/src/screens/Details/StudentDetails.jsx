@@ -9,6 +9,7 @@ import {
 	addElectiveByIdAPICall,
 	removeStudentElectiveById
 } from "../../services";
+import { useSelector } from "react-redux";
 
 const recomBadge = () => {
 	return (
@@ -27,10 +28,11 @@ const StudentDetails = ({ electives }) => {
 	const [predictions, setPredictions] = useState([])
 	const [fetched, setFetched] = useState(false)
 	const [waiting, setWaiting] = useState(true)
+	const token = useSelector(state => state.token)
 
 	const fetchData = async () => {
-		const studentDetails = await fetchStudentDetailsAPICall(email);
-		const studentElectives = await fetchStudentElectivesAPICall(email);
+		const studentDetails = await fetchStudentDetailsAPICall(email, token);
+		const studentElectives = await fetchStudentElectivesAPICall(email, token);
 		setStudentDetails(studentDetails.data);
 		setStudentElectives(studentElectives.data);
 	};
@@ -85,7 +87,7 @@ const StudentDetails = ({ electives }) => {
 			electiveId: newElective.code,
 			joiningDate: new Date(),
 		};
-		const response = await addElectiveByIdAPICall(associationObject);
+		const response = await addElectiveByIdAPICall(associationObject, token);
 		if (response.status === 200) {
 			setStudentElectives([...studentElectives, newElective]);
 		}
@@ -98,7 +100,7 @@ const StudentDetails = ({ electives }) => {
 			electiveId: electiveId,
 		}
 		try {
-			const response = await removeStudentElectiveById(dissociationObject);
+			const response = await removeStudentElectiveById(dissociationObject, token);
 			if (response.status === 200) {
 				const newStudentElectives = studentElectives.filter(
 					(elective) => elective.code !== electiveId

@@ -1,13 +1,12 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import Cookie from "js-cookie"
 
 import './Login.scss'
 import Wizard from '../../assets/wizard.png'
 
 import { useForm } from "../../hooks"
-import { login } from "../../store"
+import { login, setToken } from "../../store"
 import { fetchStudentListAPICall, loginUserAPICall, fetchElectiveListAPICall} from "../../services"
 import { setStudents, setElectives } from '../../store'
 
@@ -33,13 +32,14 @@ const Login = () => {
       let userData = {
         name: data.user.name,
         email: data.user.email,
+        token : data.token
       };
-      Cookie.set("jwt", data.token);
       dispatch(login(userData));
-      await fetchStudentListAPICall().then((res)=>{
+      dispatch(setToken(data.token));
+      await fetchStudentListAPICall(data.token).then((res)=>{
         dispatch(setStudents(res.data))
       });
-      await fetchElectiveListAPICall().then((res)=>{
+      await fetchElectiveListAPICall(data.token).then((res)=>{
         dispatch(setElectives(res.data))
       });
       setWaiting(false)

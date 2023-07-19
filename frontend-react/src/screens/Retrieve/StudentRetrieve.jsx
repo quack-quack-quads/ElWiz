@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Table, Button } from "react-bootstrap";
 import { FaTrash } from "react-icons/fa";
@@ -16,6 +16,8 @@ const StudentRetrieve = ({ students }) => {
     setEditing({ email, field });
   };
 
+  const token = useSelector(state => state.token)
+
   const handleBlur = async (
     email,
     field,
@@ -29,7 +31,7 @@ const StudentRetrieve = ({ students }) => {
         [field]: value,
         [otherField]: otherFieldValue,
       };
-      await updateStudentDetails(newStudentObject);
+      await updateStudentDetails(newStudentObject, token);
       const newStudentList = students.map((student) => {
         if (student.email === email) {
           return { ...student, [field]: value };
@@ -45,7 +47,7 @@ const StudentRetrieve = ({ students }) => {
 
   const handleDeleteStudent = async (email) => {
     try {
-      const response = await deleteStudentByIdAPICall(email);
+      const response = await deleteStudentByIdAPICall(email, token);
       if (response.status === 200) {
         const newStudentList = students.filter(
           (student) => student.email !== email

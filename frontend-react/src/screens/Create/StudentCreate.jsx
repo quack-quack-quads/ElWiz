@@ -29,7 +29,7 @@ const StudentCreate = ()=>{
 
     const students = useSelector(state => state.students);
     const dispatch = useDispatch();
-
+    const token = useSelector(state => state.token)
     const create = ()=>{
         console.log(JSON.stringify({
             name : name, 
@@ -40,7 +40,7 @@ const StudentCreate = ()=>{
             name : name, 
             email : email,
             phoneNumber : phone
-        })).then((response)=>{
+        }), token).then((response)=>{
             if(response.status === 200){
                 const newStudentList =[...students, response.data]
                 dispatch(setStudents(newStudentList))

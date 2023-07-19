@@ -8,7 +8,8 @@ const initialState = {
         role: null,
     },
     electives: [],
-    students: []
+    students: [],
+    token : null
 }
 
 export const authSlice = createSlice({
@@ -18,8 +19,12 @@ export const authSlice = createSlice({
         login: (state, action) => {
             state.user = action.payload;
         },
+        setToken : (state, action)=>{
+            state.token = action.payload;
+        },
         logout: (state) => {
             state.user = initialState.user;
+            state.token = initialState.token;
         },
         setStudents: (state, action) => {
             state.students = action.payload;
@@ -33,6 +38,7 @@ export const authSlice = createSlice({
 export const {
     login,
     logout,
+    setToken,
     setStudents,
     setElectives
 } = authSlice.actions;

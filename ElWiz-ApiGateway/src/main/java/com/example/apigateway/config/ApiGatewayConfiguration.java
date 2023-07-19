@@ -34,7 +34,6 @@ public class ApiGatewayConfiguration {
 
         CorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         ((UrlBasedCorsConfigurationSource) source).registerCorsConfiguration("/**", corsConfig);
-
         return new CorsWebFilter(source);
     }
 
@@ -49,7 +48,7 @@ public class ApiGatewayConfiguration {
                 )
                 .route(
                         p -> p.path("/auth-service/**")
-                                .uri("http://ec2-52-91-71-92.compute-1.amazonaws.com:7070")
+                                .uri("http://ec2-34-224-94-59.compute-1.amazonaws.com:7070")
                 )
                 .build();
     }

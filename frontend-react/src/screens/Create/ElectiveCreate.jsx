@@ -14,12 +14,14 @@ const ElectiveCreate = ()=>{
     const electives = useSelector(state => state.electives);
     const dispatch = useDispatch();
 
+    const token = useSelector(state => state.token)
+
     const create = ()=>{
         createElectiveAPICall(JSON.stringify({
             code : code,
             name : name, 
             description : description
-        })).then((response)=>{
+        }), token).then((response)=>{
             if(response.status === 200){
                 const newElectiveList =[...electives, response.data]
                 dispatch(setElectives(newElectiveList))
