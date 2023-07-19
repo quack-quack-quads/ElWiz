@@ -2,7 +2,9 @@ package com.example.apigateway.filters;
 
 import com.example.apigateway.config.RouteValidator;
 import com.example.apigateway.exceptions.CookieNotFoundException;
+import com.example.apigateway.exceptions.TokenInvalidException;
 import com.example.apigateway.services.JwtService;
+import org.apache.el.parser.Token;
 import org.apache.http.HttpHeaders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
@@ -30,11 +32,8 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
             if(validator.isSecured.test(exchange.getRequest())){
                 String token = null;
                 try{
-                    List<HttpCookie> cookies = exchange.getRequest().getCookies().get("jwt");
-                    for(HttpCookie cookie : cookies){
-                        System.out.println(String.format("name : %s, value : %s", cookie.getName(), cookie.getValue()));
-                    }
-                    token = cookies.get(0).getValue();
+                    List<String> authHeaders = exchange.getRequest().getHeaders().get("elwiz-auth");
+                    token = authHeaders.get(0);
                 }catch(Exception e){
                     throw new CookieNotFoundException("Auth cookie not found");
                 }
@@ -42,7 +41,7 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
                 try{
                     jwtService.validateToken(token);
                 }catch(Exception e){
-                    throw new RuntimeException("Token invalid");
+                    throw new TokenInvalidException("Token invalid");
                 }
                 String email = jwtService.extractUsername(token);
                 exchange

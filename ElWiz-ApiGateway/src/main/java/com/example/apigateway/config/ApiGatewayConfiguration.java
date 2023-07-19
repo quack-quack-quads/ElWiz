@@ -44,7 +44,7 @@ public class ApiGatewayConfiguration {
         return builder.routes()
                 .route(
                         p -> p.path("/elective-service/**")
-                                // .filters(spec -> spec.filter(authFilter))
+                                 .filters(spec -> spec.filter(authFilter))
                                 .uri("http://ec2-34-224-94-59.compute-1.amazonaws.com:8100")
                 )
                 .route(
