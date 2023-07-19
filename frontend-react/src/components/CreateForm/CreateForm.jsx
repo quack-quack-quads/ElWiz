@@ -1,7 +1,15 @@
+import { Spinner } from "react-bootstrap";
 import "./CreateForm.scss";
 import { MDBInput, MDBBtn } from "mdb-react-ui-kit";
 
-const CreateForm = ({ fields, entity, heading, description, submithandler}) => {
+const CreateForm = ({
+  fields,
+  entity,
+  heading,
+  description,
+  submithandler,
+  waiting,
+}) => {
   return (
     <div className="wrapper purplebg d-flex justify-content-center">
       <div className="CreateScreen d-flex flex-column align-items-center p-5">
@@ -9,7 +17,7 @@ const CreateForm = ({ fields, entity, heading, description, submithandler}) => {
           <div className="heading on-primary-text text-center">{heading}</div>
           <div className="description text-center">{description}</div>
         </div>
-        <div className="CreateForm">
+        <div className="CreateForm text-center">
           {fields.map((field) => {
             return (
               <MDBInput
@@ -23,11 +31,18 @@ const CreateForm = ({ fields, entity, heading, description, submithandler}) => {
               />
             );
           })}
-          <MDBBtn type="submit" block className="submitbtn"
-            onClick={submithandler}
-          >
-            Create {entity}
-          </MDBBtn>
+          {waiting ? (
+            <Spinner/>
+          ) : (
+            <MDBBtn
+              type="submit"
+              block
+              className="submitbtn"
+              onClick={submithandler}
+            >
+              Create {entity}
+            </MDBBtn>
+          )}
         </div>
       </div>
     </div>

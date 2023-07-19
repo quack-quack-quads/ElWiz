@@ -45,7 +45,8 @@ const Login = () => {
       setWaiting(false)
       navigate("/dash");
     } else {
-      throw new Error("Auth failed");
+      toast.error("Something went wrong.")
+      setWaiting(false)
     }
   }
 
@@ -58,6 +59,7 @@ const Login = () => {
       .catch((error) => {
         error.response?.data?.message !== null ? toast.error(error.response.data.message)
           : toast.error("Invalid credentials. Please try again with valid ones.");
+        setWaiting(false)
       })
   };
 

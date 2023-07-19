@@ -10,6 +10,7 @@ const ElectiveCreate = ()=>{
     const [code, setCode] = useState("")
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
+    const [waiting, setWaiting] = useState(false)
 
     const electives = useSelector(state => state.electives);
     const dispatch = useDispatch();
@@ -17,6 +18,7 @@ const ElectiveCreate = ()=>{
     const token = useSelector(state => state.token)
 
     const create = ()=>{
+        setWaiting(true)
         createElectiveAPICall(JSON.stringify({
             code : code,
             name : name, 
@@ -29,6 +31,8 @@ const ElectiveCreate = ()=>{
             }
         }).catch((error)=>{
             console.log(error)
+        }).finally(()=>{
+            setWaiting(false)
         })
     }
 
@@ -58,6 +62,7 @@ const ElectiveCreate = ()=>{
             heading={"Create a new Elective"}
             description={"Fill in the following details to enter a new elective into the database."}
             submithandler={create}
+            waiting = {waiting}
         />
 }
 

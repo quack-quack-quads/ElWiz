@@ -9,6 +9,7 @@ const StudentCreate = ()=>{
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [phone, setPhone] = useState("")
+    const [waiting, setWaiting] = useState(false)
     const fields = [
         {   
             label : "Name",
@@ -30,12 +31,9 @@ const StudentCreate = ()=>{
     const students = useSelector(state => state.students);
     const dispatch = useDispatch();
     const token = useSelector(state => state.token)
+
     const create = ()=>{
-        console.log(JSON.stringify({
-            name : name, 
-            email : email,
-            phoneNumber : phone
-        }));
+        setWaiting(true)
         createStudentAPICall(JSON.stringify({
             name : name, 
             email : email,
@@ -48,6 +46,8 @@ const StudentCreate = ()=>{
             }
         }).catch((error)=>{
             console.log(error)
+        }).finally(()=>{
+            setWaiting(false)
         })
     }
 
@@ -60,6 +60,7 @@ const StudentCreate = ()=>{
             heading={"Create a new Student"}
             description={"Fill in the following details to enter a new student into the database."}
             submithandler={create}
+            waiting={waiting}
         />
 }
 

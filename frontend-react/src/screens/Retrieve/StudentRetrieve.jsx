@@ -1,22 +1,25 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { Table, Button } from "react-bootstrap";
+import { Table, Button, Spinner } from "react-bootstrap";
 import { FaTrash } from "react-icons/fa";
 import { toast, ToastContainer } from "react-toastify";
+import Modal from "react-bootstrap/Modal";
 
 import { updateStudentDetails, deleteStudentByIdAPICall } from "../../services";
 import { setStudents } from "../../store";
 import "./table.scss";
+
+
 const StudentRetrieve = ({ students }) => {
   const dispatch = useDispatch();
   const [editing, setEditing] = useState({});
-
+  const [waiting, setWaiting] = useState(false);
   const handleDoubleClick = (email, field) => {
     setEditing({ email, field });
   };
 
-  const token = useSelector(state => state.token)
+  const token = useSelector((state) => state.token);
 
   const handleBlur = async (
     email,
@@ -31,6 +34,7 @@ const StudentRetrieve = ({ students }) => {
         [field]: value,
         [otherField]: otherFieldValue,
       };
+      setWaiting(true);
       await updateStudentDetails(newStudentObject, token);
       const newStudentList = students.map((student) => {
         if (student.email === email) {
@@ -42,11 +46,14 @@ const StudentRetrieve = ({ students }) => {
       setEditing({});
     } catch (error) {
       console.log(error);
+    } finally {
+      setWaiting(false);
     }
   };
 
   const handleDeleteStudent = async (email) => {
     try {
+      setWaiting(true);
       const response = await deleteStudentByIdAPICall(email, token);
       if (response.status === 200) {
         const newStudentList = students.filter(
@@ -55,8 +62,10 @@ const StudentRetrieve = ({ students }) => {
         dispatch(setStudents(newStudentList));
       }
     } catch (error) {
-		toast.error("Please remove all electives from the student to delete it.")
+      toast.error("Please remove all electives from the student to delete it.");
       console.log(error);
+    } finally {
+      setWaiting(false);
     }
   };
 
@@ -74,6 +83,20 @@ const StudentRetrieve = ({ students }) => {
         pauseOnHover
         theme="light"
       />
+
+      <Modal
+        show={waiting}
+        onHide={() => {
+          setWaiting(false);
+        }}
+        centered
+        size="sm"
+      >
+        <Modal.Body className="text-center">
+          <Spinner style={{ margin: "5vh 0" }} />
+        </Modal.Body>
+      </Modal>
+
       <h1>Student List</h1>
       <div className="tableBg">
         <Table striped bordered hover>

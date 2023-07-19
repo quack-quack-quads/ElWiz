@@ -1,12 +1,10 @@
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { Table, Button } from "react-bootstrap";
-import Form from "react-bootstrap/Form";
+import { Table, Button, Spinner} from "react-bootstrap";
 import { FaTrash } from "react-icons/fa";
-
-import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
+import Modal from "react-bootstrap/Modal";
 
 import {
   deleteElectiveByIdAPICall,
@@ -19,11 +17,12 @@ const ElectiveRetrieve = ({ electives }) => {
   const dispatch = useDispatch();
   const [editing, setEditing] = useState({});
   const [checked, setChecked] = useState(false);
+  const [waiting, setWaiting] = useState(false);
 
   const handleDoubleClick = (code, field) => {
     setEditing({ code, field });
   };
-  const token = useSelector(state => state.token)
+  const token = useSelector((state) => state.token);
 
   const handleBlur = async (
     code,
@@ -39,6 +38,7 @@ const ElectiveRetrieve = ({ electives }) => {
         [field]: value,
         [otherField]: otherFieldValue,
       };
+      setWaiting(true);
       await updateElectiveDetails(newElectiveObject, token);
       const newElectiveList = electives.map((elective) => {
         if (elective.code === code) {
@@ -53,11 +53,14 @@ const ElectiveRetrieve = ({ electives }) => {
       setEditing({});
     } catch (error) {
       console.log(error);
+    } finally {
+      setWaiting(false);
     }
   };
 
   const handleDeleteElective = async (code) => {
     try {
+      setWaiting(true);
       const response = await deleteElectiveByIdAPICall(code, token);
       if (response.status === 200) {
         const newElectiveList = electives.filter(
@@ -66,8 +69,10 @@ const ElectiveRetrieve = ({ electives }) => {
         dispatch(setElectives(newElectiveList));
       }
     } catch (error) {
-		toast.error("Please remove all students from the elective to delete it.")
+      toast.error("Please remove all students from the elective to delete it.");
       console.log(error);
+    } finally {
+      setWaiting(false);
     }
   };
   return (
@@ -84,6 +89,20 @@ const ElectiveRetrieve = ({ electives }) => {
         pauseOnHover
         theme="light"
       />
+
+      <Modal
+        show={waiting}
+        onHide={() => {
+          setWaiting(false);
+        }}
+        centered
+        size="sm"
+      >
+        <Modal.Body className="text-center">
+          <Spinner style={{ margin: "5vh 0" }} />
+        </Modal.Body>
+      </Modal>
+
       <h1>Elective List</h1>
 
       <div className="tableBg">

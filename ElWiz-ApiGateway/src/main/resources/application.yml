@@ -16,7 +16,7 @@ server :
   ssl:
     enabled: true
     key-store-type: PKCS12
-    key-store: qqqkeystore.p12
+    key-store: /app/qqqkeystore.p12
     key-store-password: ${KEY_STORE_PASSWORD}
     key-alias: ${KEY_STORE_ALIAS}
 
